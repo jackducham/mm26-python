@@ -1,3 +1,5 @@
 # virtualenv
 mm26/*
 __pycache__/*
+*.jar
+test.py
