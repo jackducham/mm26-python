@@ -24,23 +24,19 @@ ENDGAME_URL = "http://{}:{}/infra/endgame".format(GAME_ENGINE_IP, GAME_ENGINE_PO
 
 GLOBAL_SERVER_RUN_STATUS = {}
 GLOBAL_SERVER_NO_ERROR = {}
-GLOBAL_PORT_LOCK = threading.Lock()
+GLOBAL_PORT_LOCK = None
 
 class InfraTestCase(unittest.TestCase):
     def setUp(self):
+        global GLOBAL_SERVER_RUN_STATUS, GLOBAL_SERVER_NO_ERROR, GLOBAL_PORT_LOCK
         GLOBAL_SERVER_RUN_STATUS = {}
         GLOBAL_SERVER_NO_ERROR = {}
         GLOBAL_PORT_LOCK = threading.Lock()
         start_game_engine()
         infra_URL = INFRA_URL
-        while(True):
-            time.sleep(5)
-            try:
-                requests.post(infra_URL)
-                break
-            except:
-                continue
-        print("Successfully setup game engine.")
+        # Give game engine 5 seconds to start up
+        # Need to replace with a more reliable method
+        time.sleep(5)
 
     def tearDown(self):
         end_game_engine()
@@ -58,7 +54,6 @@ class InfraTestCase(unittest.TestCase):
 
         values = list(GLOBAL_SERVER_NO_ERROR.values())
         self.assertTrue(all(values))
-
 
 class Handler(BaseHTTPRequestHandler):
 
@@ -102,12 +97,9 @@ class GameServer():
         """
         Sets up game server with given port and sends infra player information.
         """
-
         self.my_server = HTTPServer((GAME_ENGINE_IP, game_port), Handler)
         GLOBAL_SERVER_RUN_STATUS[self.my_server] = True
         GLOBAL_SERVER_NO_ERROR[self.my_server] = True
-
-        GLOBAL_PORT_LOCK.release()
 
         player_URL = create_player_URL(game_port)
         infra_URL = INFRA_URL
@@ -119,7 +111,7 @@ class GameServer():
         requests.post(infra_URL, post_msg)
 
         print("Set up gameserver on port {}!".format(game_port))
-
+        GLOBAL_PORT_LOCK.release()
         while GLOBAL_SERVER_RUN_STATUS[self.my_server]:
             self.my_server.handle_request()
 

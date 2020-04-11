@@ -1,9 +1,8 @@
 # MechMania 26 Python Starter Pack
 
 ## mock_infra.py
-Creates game servers using threads and sends information about these new game servers
-to the infra endpoint, which is currently located in the game engine.
-
+Unittest based attempt to mock infrastructure. Currently only 1 test that starts
+up multiple game servers and connects to the server.
 
 ## strategy.py
 Simple interface that allows users to parse player_turn proto, make decisions
