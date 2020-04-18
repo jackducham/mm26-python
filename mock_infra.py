@@ -36,7 +36,7 @@ class InfraTestCase(unittest.TestCase):
         infra_URL = INFRA_URL
         # Give game engine 5 seconds to start up
         # Need to replace with a more reliable method
-        time.sleep(5)
+        time.sleep(10)
 
     def tearDown(self):
         end_game_engine()
