@@ -4,7 +4,6 @@ import threading
 import requests
 import uuid
 
-# from protos import player_protos_pb2
 from protos import infra_pb2
 from strategy import Strategy
 
@@ -49,14 +48,7 @@ class AtomicInt():
 
 class InfraTestCase(unittest.TestCase):
     def setUp(self):
-        # global GLOBAL_SERVER_RUN_STATUS, GLOBAL_SERVER_NO_ERROR, GLOBAL_PORT_LOCK
-        # GLOBAL_SERVER_RUN_STATUS = {}
-        # GLOBAL_SERVER_NO_ERROR = {}
-        # GLOBAL_PORT_LOCK = threading.Lock()
         start_game_engine()
-        # infra_URL = INFRA_URL
-        # Give game engine 5 seconds to start up
-        # Need to replace with a more reliable method
         time.sleep(10)
         self.thread_list = []
         self.ports = []
@@ -127,68 +119,6 @@ class InfraTestCase(unittest.TestCase):
 def CreateGameServer(host, url, atomicInt=None):
     GameServer(host, url, atomicInt)
 
-# class Handler(BaseHTTPRequestHandler):
-#
-#     def do_POST(self):
-#         """
-#         Gameserver will respond to any POST requests as defined below.
-#         Can specify endpoint by checking if self.path == /<endpoint>
-#
-#         Function reads POST requests, parses payload to a playerTurn proto, and
-#         passes it on to a the "Strategy" class where users can define their
-#         decisions. Then gameserver will respond to game engine by sending a
-#         response message containing the playerDecision proto.
-#         """
-#         if self.path == "/" + GAME_SERVER_ENDPOINT:
-#
-#             content_length = int(self.headers['Content-Length'])
-#             body = self.rfile.read(content_length)
-#             try:
-#                 player_turn = player_protos_pb2.PlayerTurn()
-#                 player_turn.ParseFromString(body)
-#                 strategy = Strategy()
-#                 response_msg = strategy.create_player_decision(player_turn)
-#
-#                 self.send_response(200)
-#                 self.send_header("Content-Length", len(response_msg))
-#                 self.end_headers()
-#                 response = BytesIO()
-#                 response.write(response_msg)
-#
-#                 self.wfile.write(response.getvalue())
-#                 self.wfile.flush()
-#
-#             except Exception as e:
-#                 print(e)
-#                 GLOBAL_SERVER_NO_ERROR[self.server] = False
-#
-#             GLOBAL_SERVER_RUN_STATUS[self.server] = False
-
-# class GameServer():
-#     def __init__(self, game_port):
-#         """
-#         Sets up game server with given port and sends infra player information.
-#         """
-#         self.my_server = HTTPServer((GAME_ENGINE_IP, game_port), Handler)
-#         GLOBAL_SERVER_RUN_STATUS[self.my_server] = True
-#         GLOBAL_SERVER_NO_ERROR[self.my_server] = True
-#
-#         player_URL = create_player_URL(game_port)
-#         infra_URL = INFRA_URL
-#
-#         player = infra_pb2.InfraPlayer()
-#         player.player_name = str(uuid.uuid4())
-#         player.player_ip = player_URL + GAME_SERVER_ENDPOINT
-#         post_msg = player.SerializeToString()
-#         requests.post(infra_URL, post_msg)
-#
-#         print("Set up gameserver on port {}!".format(game_port))
-#         GLOBAL_PORT_LOCK.release()
-#         while GLOBAL_SERVER_RUN_STATUS[self.my_server]:
-#             self.my_server.handle_request()
-
-
-
 def get_open_port():
     soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     soc.bind(("",0))
@@ -197,27 +127,13 @@ def get_open_port():
     soc.close()
     return port
 
-# def create_game_server():
-#     """
-#     Creates a game server and puts the open_port in the global ports list.
-#     """
-#     GLOBAL_PORT_LOCK.acquire()
-#     port = get_open_port()
-#     try:
-#         GameServer(port)
-#     except Exception as e:
-#         print("Failed to set up GameServer:", e)
-#         GLOBAL_PORT_LOCK.release()
-
-
 def create_player_URL(port):
     return "http://{}:{}/".format(GAME_ENGINE_IP, port)
 
 def run_game_engine():
-
     try:
-        subprocess.call(['java', '-jar', 'MM26GameEngine-0.0.1-SNAPSHOT.jar'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        # subprocess.call(['java', '-jar', 'MM26GameEngine.jar'])
+        # subprocess.call(['java', '-jar', 'MM26GameEngine-0.0.1-SNAPSHOT.jar'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.call(['java', '-jar', 'MM26GameEngine.jar'])
     except Exception as e:
         print(e)
 

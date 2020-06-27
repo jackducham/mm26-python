@@ -1,10 +1,8 @@
 from flask import Flask, request
-
 from protos import player_protos_pb2
-from strategy import Strategy
-import threading
-
 import sys
+
+from strategy import Strategy
 
 class GameServer():
     def __init__(self, url, port, testing_objects=None):
