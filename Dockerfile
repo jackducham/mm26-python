@@ -1,12 +1,12 @@
 FROM openjdk
 COPY --from=python:3 / /
 
-RUN pip install requests protobuf
-
+RUN pip install requests protobuf flask
 
 COPY protos /protos
 COPY MM26GameEngine.jar /MM26GameEngine.jar
-COPY mock_infra.py /mock_infra.py
+COPY MockInfra.py /MockInfra.py
+COPY GameServer.py /GameServer.py
 COPY strategy.py /strategy.py
 
-CMD ["python", "mock_infra.py"]
+CMD ["python", "GameServer.py", "127.0.0.1", "8000"]
