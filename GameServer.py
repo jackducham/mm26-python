@@ -3,12 +3,14 @@ from protos import player_protos_pb2
 import sys
 
 from strategy import Strategy
+from MemoryObject import MemoryObject
 
 class GameServer():
     def __init__(self, url, port, testing_objects=None):
         self.url = url
         self.port = port
         self.debug = False
+        self.memory = MemoryObject()
         if testing_objects is not None:
             self.atomicInt = testing_objects
             self.debug = True
@@ -24,7 +26,7 @@ class GameServer():
 
             player_turn = player_protos_pb2.PlayerTurn()
             player_turn.ParseFromString(body)
-            strategy = Strategy()
+            strategy = Strategy(self.memory)
             response_msg = strategy.create_player_decision(player_turn)
 
             if self.debug:

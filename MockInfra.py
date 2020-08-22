@@ -12,14 +12,14 @@ import unittest
 import time
 
 from GameServer import GameServer
+from redis import Redis
 
 INFRA_PORT = 8080
-GAME_ENGINE_PORT = 8080
 GAME_ENGINE_IP = "localhost"
 GAME_SERVER_ENDPOINT = "server"
 LOCALHOST = "127.0.0.1"
 INFRA_URL = "http://{}:{}/infra/player/new".format(GAME_ENGINE_IP, INFRA_PORT)
-ENDGAME_URL = "http://{}:{}/infra/endgame".format(GAME_ENGINE_IP, GAME_ENGINE_PORT)
+ENDGAME_URL = "http://{}:{}/infra/endgame".format(GAME_ENGINE_IP, INFRA_PORT)
 
 GLOBAL_SERVER_RUN_STATUS = {}
 GLOBAL_SERVER_NO_ERROR = {}
@@ -98,23 +98,23 @@ class InfraTestCase(unittest.TestCase):
 
         return self.atomicInt.getValue() >= final_value
 
-    # def test_canReceivePlayerTurn(self):
-    #     self.assertTrue(self.runner(1, 1, 30))
+    def test_canReceivePlayerTurn(self):
+        self.assertTrue(self.runner(1, 1, 30))
 
-    # def test_canReceiveMultiplePlayerTurns(self):
-    #     self.assertTrue(self.runner(5, 5, 30))
+    def test_canReceiveMultiplePlayerTurns(self):
+        self.assertTrue(self.runner(5, 5, 30))
     #
-    # def test_canReceiveMultipleTurns(self):
-    #     self.assertTrue(self.runner(1, 5, 30))
-    #
-    # def test_canReceiveMultiplePlayersMultipleTurns(self):
-    #     self.assertTrue(self.runner(5, 25, 30))
-    #
-    # def test_canReceiveManyPlayers(self):
-    #     self.assertTrue(self.runner(100, 500, 180))
-    #
-    # def test_canReceiveManyPlayersLongTime(self):
-    #     self.assertTrue(self.runner(100, 5000, 300))
+    def test_canReceiveMultipleTurns(self):
+        self.assertTrue(self.runner(1, 5, 30))
+
+    def test_canReceiveMultiplePlayersMultipleTurns(self):
+        self.assertTrue(self.runner(5, 25, 30))
+
+    def test_canReceiveManyPlayers(self):
+        self.assertTrue(self.runner(100, 500, 180))
+
+    def test_canReceiveManyPlayersLongTime(self):
+        self.assertTrue(self.runner(100, 5000, 300))
 
 def CreateGameServer(host, url, atomicInt=None):
     GameServer(host, url, atomicInt)
@@ -132,7 +132,7 @@ def create_player_URL(port):
 
 def run_game_engine():
     try:
-        # subprocess.call(['java', '-jar', 'MM26GameEngine-0.0.1-SNAPSHOT.jar'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        # subprocess.call(['java', '-jar', 'MM26GameEngine.jar'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.call(['java', '-jar', 'MM26GameEngine.jar'])
     except Exception as e:
         print(e)
