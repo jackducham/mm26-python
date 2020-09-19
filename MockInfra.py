@@ -95,7 +95,6 @@ class InfraTestCase(unittest.TestCase):
                 self.shutdown_players()
                 break
             wait_time += 1
-
         return self.atomicInt.getValue() >= final_value
 
     def test_canReceivePlayerTurn(self):
@@ -103,7 +102,7 @@ class InfraTestCase(unittest.TestCase):
 
     def test_canReceiveMultiplePlayerTurns(self):
         self.assertTrue(self.runner(5, 5, 30))
-    #
+
     def test_canReceiveMultipleTurns(self):
         self.assertTrue(self.runner(1, 5, 30))
 
@@ -142,7 +141,8 @@ def start_game_engine():
     thread.start()
 
 def end_game_engine():
-    requests.get(ENDGAME_URL)
+    payload = {"password":""}
+    requests.get(ENDGAME_URL, params=payload)
 
 if __name__ == "__main__":
     """

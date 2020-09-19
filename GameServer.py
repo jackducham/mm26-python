@@ -1,5 +1,5 @@
 from flask import Flask, request
-from protos import player_protos_pb2
+from protos import player_pb2
 import sys
 
 from strategy import Strategy
@@ -11,6 +11,8 @@ class GameServer():
         self.port = port
         self.debug = False
         self.memory = MemoryObject()
+        self.strategy = Strategy(self.memory)
+
         if testing_objects is not None:
             self.atomicInt = testing_objects
             self.debug = True
@@ -22,12 +24,8 @@ class GameServer():
 
         @app.route('/server', methods=['POST'])
         def send_decision():
-            body = request.get_data()
-
-            player_turn = player_protos_pb2.PlayerTurn()
-            player_turn.ParseFromString(body)
-            strategy = Strategy(self.memory)
-            response_msg = strategy.create_player_decision(player_turn)
+            payload = request.get_data()
+            response_msg = self.strategy.create_player_decision(payload)
 
             if self.debug:
                 self.atomicInt.increment()
