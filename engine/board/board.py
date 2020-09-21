@@ -1,3 +1,4 @@
+from engine.characters.position import Position
 from protos import board_pb2
 
 
@@ -19,7 +20,7 @@ class Board:
         self.portals = []
         for i in range(len(proto_board.portals)):
             # TODO: implement Position
-            self.portals.append(Position(board.portals[i]))
+            self.portals.append(Position(proto_board.portals[i]))
 
     def get_grid(self):
         return self.grid

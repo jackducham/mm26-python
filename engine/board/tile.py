@@ -1,3 +1,8 @@
+from engine.items.Hat import Hat
+from engine.items.clothes import Clothes
+from engine.items.consumable import Consumable
+from engine.items.shoes import Shoes
+from engine.items.weapon import Weapon
 from protos import board_pb2
 from protos import item_pb2
 
@@ -9,22 +14,16 @@ class Tile:
 
         self.items = []
         for item in proto_tile.items:
-            # TODO: create Item class
             if isinstance(item, item_pb2.Clothes):
-                # TODO create Clothes
-                self.items.append(Clothes(item))
+                self.items.append(Clothes(item.clothes))
             elif isinstance(item, item_pb2.Hat):
-                # TODO create Hat
-                self.items.append(Hat(item))
+                self.items.append(Hat(item.hat))
             elif isinstance(item, item_pb2.Shoes):
-                # TODO create Shoes
-                self.items.append(Shoes(item))
+                self.items.append(Shoes(item.shoes))
             elif isinstance(item, item_pb2.Weapon):
-                # TODO create Weapon
-                self.items.append(Weapon(item))
+                self.items.append(Weapon(item.weapon))
             elif isinstance(item, item_pb2.Consumable):
-                # TODO create Consumable
-                self.items.append(Consumable(item))
+                self.items.append(Consumable(item.max_stack, item.consumable))
 
         if proto_tile.tile_type == board_pb2.Tile.TileType.VOID:
             self.type = "VOID"

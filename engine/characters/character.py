@@ -1,3 +1,6 @@
+from engine.characters.position import Position
+from engine.items.temp_status_modifier import TempStatusModifier
+from engine.items.weapon import Weapon
 from protos import character_pb2
 
 
@@ -24,11 +27,9 @@ class Character:
         self.ticks_since_death = character_proto.ticks_since_death
         self.dead = character_proto.is_dead
 
-        # TODO implement Position
         self.position = Position(character_proto.position)
         self.spawn_point = Position(character_proto.spawn_point)
 
-        # TODO implement Weapon
         self.weapon = Weapon(character_proto.weapon)
 
         self.active_effects = []
@@ -36,7 +37,6 @@ class Character:
                         character_proto.active_effects_temp_status_modifier,
                         character_proto.active_effects_source,
                         character_proto.active_effects_is_player):
-            # TODO implement TempStatusModifier
             effect = TempStatusModifier(tup[0])
             source = tup[1]
             is_player = tup[2]

@@ -1,3 +1,8 @@
+from engine.items.Hat import Hat
+from engine.items.clothes import Clothes
+from engine.items.consumable import Consumable
+from engine.items.shoes import Shoes
+from engine.items.weapon import Weapon
 from protos import character_pb2
 from protos import item_pb2
 from engine.characters import character
@@ -16,31 +21,24 @@ class Player(character.Character):
 
         super().__init__(player_proto.character)
 
-        # TODO write items
         self.hat = Hat(player_proto.hat)
         self.clothes = Clothes(player_proto.clothes)
         self.shoes = Shoes(player_proto.shoes)
-        self.inventory = [None] * self.INVENTORY_SIZE
+        self.inventory = [] * self.INVENTORY_SIZE
         # TODO fix
         self.stats = None
 
         for i, item in enumerate(player_proto.inventory):
-            # TODO: create Item class
             if isinstance(item, item_pb2.Clothes):
-                # TODO create Clothes
-                self.inventory[i] = Clothes(item)
+                self.inventory[i] = Clothes(item.clothes)
             elif isinstance(item, item_pb2.Hat):
-                # TODO create Hat
-                self.inventory[i] = Hat(item)
+                self.inventory[i] = Hat(item.hat)
             elif isinstance(item, item_pb2.Shoes):
-                # TODO create Shoes
-                self.inventory[i] = Shoes(item)
+                self.inventory[i] = Shoes(item.shoes)
             elif isinstance(item, item_pb2.Weapon):
-                # TODO create Weapon
-                self.inventory[i] = Weapon(item)
+                self.inventory[i] = Weapon(item.weapon)
             elif isinstance(item, item_pb2.Consumable):
-                # TODO create Consumable
-                self.inventory[i] = Consumable(item)
+                self.inventory[i] = Consumable(item.max_stack, item.consumable)
 
     def get_hat(self):
         return self.hat
