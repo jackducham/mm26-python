@@ -1,8 +1,9 @@
-from protos import character_pb2
+from engine.characters.character_decision import CharacterDecision
+from engine.game_state import GameState
 from protos import player_pb2
-from protos import game_pb2
 
-class Strategy():
+
+class Strategy:
     def __init__(self, memory):
         self.memory = memory
 
@@ -15,11 +16,12 @@ class Strategy():
         player_turn = player_pb2.PlayerTurn()
         player_turn.ParseFromString(payload)
 
-        game_state = player_turn.game_state
+        game_state = GameState(player_turn.game_state)
         player_name = player_turn.player_name
 
-        player_decision = character_pb2.CharacterDecision()
-        player_decision.decision_type = character_pb2.DecisionType.NONE
-        response_msg = player_decision.SerializeToString()
+        player_decision = CharacterDecision(
+            # TODO implement
+        )
+        response_msg = player_decision.build_proto_class_character_decision().SerializeToString()
 
         return response_msg

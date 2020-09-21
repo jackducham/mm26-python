@@ -42,8 +42,7 @@ class Position:
         return self.x == other.x and self.y == other.y and self.board_id == other.board_id
 
     def __hash__(self):
-        # TODO
-        return None
+        return hash(self)
 
     def manhattan_distance(self, other):
         return abs(self.x - other.x) + abs(self.y - other.y)
