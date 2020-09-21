@@ -2,12 +2,9 @@ import redis
 import json
 import re
 import os
-from RedisWritePolicy import *
 from SetValueResult import *
 
 class MemoryObject:
-    redis_write_policy = RedisWritePolicy.WRITEBACK
-
     DEFAULT_STRING = ""
     DEFAULT_FLOAT = 0.0
     DEFAULT_INT = 0
@@ -16,7 +13,7 @@ class MemoryObject:
     DEFAULTS = {
         bool: DEFAULT_BOOLEAN,
         int: DEFAULT_INT,
-        float: DEFAULT_FLOAT,
+        float: DEFAULT_FLOAT, 
         str: DEFAULT_STRING
     }
 
@@ -31,24 +28,16 @@ class MemoryObject:
     REDIS_CONNECTION = None
     user_data = {}
 
-    def __init__(self, target_engine = None, team_name = None, host = None, port = None, password = None, write_policy = RedisWritePolicy.WRITEBACK):
-        self.redis_write_policy = write_policy
-
+    def __init__(self, target_engine = None, team_name = None, host = None, port = None, password = None):
         self.TARGET_ENGINE = target_engine if target_engine else os.getenv("TARGET_ENGINE")
         self.TEAM_NAME = team_name if team_name else os.getenv("TEAM_NAME")
         self.HOST = host if host else os.getenv("REDIS_HOST")
         self.PORT = port if port else int(os.getenv("REDIS_PORT"))
         self.PASSWORD = password if password else os.getenv("REDIS_PASSWORD")
+        
+        self.USER_DATA_KEY = f'{self.TEAM_NAME.lower().replace(" ", "_")}_{self.TARGET_ENGINE}'
 
-        self.USER_DATA_KEY = f'{self.TEAM_NAME.replace(" ", "_")}_{self.TARGET_ENGINE}'
         self.initialize()
-
-
-    def setRedisWritePolicy(self, write_policy : RedisWritePolicy):
-        self.redis_write_policy = write_policy
-
-    def getRedisWritePolicy(self):
-        return self.redis_write_policy
 
     def set_value(self, key, value):
         if not self.is_connected():
@@ -62,8 +51,7 @@ class MemoryObject:
 
         self.user_data[key] = value
 
-        if (self.redis_write_policy == RedisWritePolicy.WRITETHROUGH):
-            self.save_data()
+        self.save_data()
 
         return SetValueResult.OPERATION_SUCCESS
 
@@ -71,7 +59,7 @@ class MemoryObject:
         if data_type not in self.DEFAULTS:
             return (None, False)
 
-        if key not in self.user_data:
+        if key not in self.user_data:            
             return (self.DEFAULTS[data_type], False)
 
         value = self.user_data[key]
@@ -143,14 +131,16 @@ class MemoryObject:
 
     def get_connection(self):
         try:
-            connection = redis.Redis(host=self.HOST, port=self.PORT, password=self.PASSWORD, socket_connect_timeout=1, socket_keepalive=5)
+            connection = redis.Redis(host=self.HOST, port=self.PORT, socket_connect_timeout=1, password=self.PASSWORD)
+
             ping = connection.ping()
+
             if ping:
                 self.REDIS_CONNECTION = connection
                 return True
 
             self.REDIS_CONNECTION = None
             return False
-        except Exception as e:
+        except Exception:
             self.REDIS_CONNECTION = None
             return False
