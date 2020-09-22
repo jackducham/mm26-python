@@ -100,20 +100,20 @@ class InfraTestCase(unittest.TestCase):
     def test_canReceivePlayerTurn(self):
         self.assertTrue(self.runner(1, 1, 30))
 
-    def test_canReceiveMultiplePlayerTurns(self):
-        self.assertTrue(self.runner(5, 5, 30))
-
-    def test_canReceiveMultipleTurns(self):
-        self.assertTrue(self.runner(1, 5, 30))
-
-    def test_canReceiveMultiplePlayersMultipleTurns(self):
-        self.assertTrue(self.runner(5, 25, 30))
-
-    def test_canReceiveManyPlayers(self):
-        self.assertTrue(self.runner(100, 500, 180))
-
-    def test_canReceiveManyPlayersLongTime(self):
-        self.assertTrue(self.runner(100, 5000, 300))
+    # def test_canReceiveMultiplePlayerTurns(self):
+    #     self.assertTrue(self.runner(5, 5, 30))
+    #
+    # def test_canReceiveMultipleTurns(self):
+    #     self.assertTrue(self.runner(1, 5, 30))
+    #
+    # def test_canReceiveMultiplePlayersMultipleTurns(self):
+    #     self.assertTrue(self.runner(5, 25, 30))
+    #
+    # def test_canReceiveManyPlayers(self):
+    #     self.assertTrue(self.runner(100, 500, 180))
+    #
+    # def test_canReceiveManyPlayersLongTime(self):
+    #     self.assertTrue(self.runner(100, 5000, 300))
 
 def CreateGameServer(host, url, atomicInt=None):
     GameServer(host, url, atomicInt)
