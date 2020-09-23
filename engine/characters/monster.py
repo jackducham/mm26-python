@@ -14,4 +14,7 @@ class Monster(character.Character):
 
         super().__init__(monster_proto.character)
 
-        self.drops = []
+        self.aggro_range = monster_proto.aggro_range
+
+    def get_aggro_range(self):
+        return self.aggro_range

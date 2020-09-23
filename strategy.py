@@ -26,6 +26,4 @@ class Strategy:
         player_decision = CharacterDecision(
             # TODO implement
         )
-        response_msg = player_decision.build_proto_class_character_decision().SerializeToString()
-
-        return response_msg
+        return player_decision

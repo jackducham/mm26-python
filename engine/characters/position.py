@@ -1,4 +1,5 @@
 from protos import character_pb2
+import sys
 
 
 class Position:
@@ -45,4 +46,6 @@ class Position:
         return hash(self)
 
     def manhattan_distance(self, other):
+        if other.board_id != self.board_id:
+            return sys.maxsize
         return abs(self.x - other.x) + abs(self.y - other.y)

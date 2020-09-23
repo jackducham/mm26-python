@@ -25,8 +25,6 @@ class Player(character.Character):
         self.clothes = Clothes(player_proto.clothes)
         self.shoes = Shoes(player_proto.shoes)
         self.inventory = [] * self.INVENTORY_SIZE
-        # TODO fix
-        self.stats = None
 
         for i, item in enumerate(player_proto.inventory):
             if isinstance(item, item_pb2.Clothes):
@@ -186,20 +184,3 @@ class Player(character.Character):
 
     def get_free_inventory_index(self):
         return -1 if None not in self.inventory else self.inventory.index(None)
-
-    def get_extra_stats(self):
-        return self.stats
-
-    class Stats:
-        def __init__(self, stats_proto: character_pb2.PlayerStats):
-            if not isinstance(stats_proto, character_pb2.PlayerStats):
-                raise ValueError(
-                    'Incorrect object type; expected character_pb2.PlayerStats, got {}'.format(
-                        type(
-                            stats_proto
-                        )))
-
-            self.monsters_slain = stats_proto.monsters_slain
-            self.death_count = stats_proto.death_count
-            self.turns_since_joined = stats_proto.turns_since_joined
-

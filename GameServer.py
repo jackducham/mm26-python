@@ -1,11 +1,11 @@
 from flask import Flask, request
-from protos import player_pb2
 import sys
 
 from strategy import Strategy
 from MemoryObject import MemoryObject
 
-class GameServer():
+
+class GameServer:
     def __init__(self, url, port, testing_objects=None):
         self.url = url
         self.port = port
@@ -25,7 +25,8 @@ class GameServer():
         @app.route('/server', methods=['POST'])
         def send_decision():
             payload = request.get_data()
-            response_msg = self.strategy.create_player_decision(payload)
+            response_msg = self.strategy.create_player_decision(payload). \
+                build_proto_class_character_decision().SerializeToString()
 
             if self.debug:
                 self.atomicInt.increment()
@@ -47,6 +48,7 @@ class GameServer():
             app.run(host=self.url, port=self.port)
         except Exception as e:
             print("Failed to start GameServer: " + e)
+
 
 if __name__ == "__main__":
     url = sys.argv[1]
