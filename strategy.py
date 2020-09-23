@@ -11,19 +11,18 @@ class Strategy:
     def __init__(self, memory):
         self.memory = memory
 
-    def create_player_decision(self, payload):
+    def make_decision(self, player_name, game_state):
         """
         Parameters:
-        payload (proto): Game turn data sent by game engine.
+        player_name (string): The name of your player
+        game_state (GameState): The current game state
         """
 
-        player_turn = player_pb2.PlayerTurn()
-        player_turn.ParseFromString(payload)
+        # TODO: Implement your strategy here!
 
-        game_state = GameState(player_turn.game_state)
-        player_name = player_turn.player_name
-
-        player_decision = CharacterDecision(
-            # TODO implement
+        decision = CharacterDecision(
+            decision_type="NONE",
+            action_position=None,
+            action_index=-1
         )
-        return player_decision
+        return decision

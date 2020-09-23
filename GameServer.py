@@ -1,5 +1,10 @@
+from engine.characters.character_decision import CharacterDecision
 from flask import Flask, request
 import sys
+
+from protos import player_pb2
+from protos import character_pb2
+from engine.game_state import GameState
 
 from strategy import Strategy
 from MemoryObject import MemoryObject
@@ -25,13 +30,33 @@ class GameServer:
         @app.route('/server', methods=['POST'])
         def send_decision():
             payload = request.get_data()
-            response_msg = self.strategy.create_player_decision(payload). \
-                build_proto_class_character_decision().SerializeToString()
+
+            player_turn = player_pb2.PlayerTurn()
+            player_turn.ParseFromString(payload)
+
+            game_state = GameState(player_turn.game_state)
+            player_name = player_turn.player_name
+
+            response_msg = character_pb2.CharacterDecision()
+
+            try:
+                decision = self.strategy.make_decision(player_name, game_state)
+            except:
+                print("Exception while implementing user strategy: {0}".format(sys.exc_info()[0]))
+                decision = None
+
+            if decision is not None:
+                response_msg = decision.build_proto_class_character_decision()
+            else:
+                # Build NONE decision if contestant code failed
+                response_msg.decision_type = character_pb2.NONE
+                response_msg.action_position = None
+                response_msg.index = -1
 
             if self.debug:
                 self.atomicInt.increment()
 
-            return response_msg
+            return response_msg.SerializeToString()
 
         @app.route('/shutdown', methods=['POST'])
         def shutdown():
