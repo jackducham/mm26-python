@@ -1,28 +1,28 @@
-from protos import character_pb2
+from engine.characters.character_decision import CharacterDecision
+from engine.game_state import GameState
 from protos import player_pb2
 from protos import game_pb2
 from protos import api_pb2
 import API
 import sys
 
-class Strategy():
+
+class Strategy:
     def __init__(self, memory):
         self.memory = memory
 
-    def create_player_decision(self, payload):
+    def make_decision(self, player_name, game_state):
         """
         Parameters:
-        payload (proto): Game turn data sent by game engine.
+        player_name (string): The name of your player
+        game_state (GameState): The current game state
         """
 
-        player_turn = player_pb2.PlayerTurn()
-        player_turn.ParseFromString(payload)
+        # TODO: Implement your strategy here!
 
-        game_state = player_turn.game_state
-        player_name = player_turn.player_name
-
-        player_decision = character_pb2.CharacterDecision()
-        player_decision.decision_type = character_pb2.DecisionType.NONE
-        response_msg = player_decision.SerializeToString()
-
-        return response_msg
+        decision = CharacterDecision(
+            decision_type="NONE",
+            action_position=None,
+            action_index=-1
+        )
+        return decision
