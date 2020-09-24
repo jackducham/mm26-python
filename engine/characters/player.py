@@ -80,9 +80,8 @@ class Player(character.Character):
             flat_change += self.shoes.get_stats.get_flat_speed_change()
             percent_change += self.shoes.get_stats().get_percent_speed_change()
 
-            if self.hat is not None and self.hat.get_magic_effect() == "SHOES_BOOST":
-                flat_change += self.shoes.get_stats.get_flat_speed_change()
-            if self.accessory is not None and self.accessory.get_magic_effect() == "SHOES_BOOST":
+            if (self.hat is not None and self.hat.get_magic_effect() == "SHOES_BOOST") or \
+                    (self.accessory is not None and self.accessory.get_magic_effect() == "SHOES_BOOST"):
                 flat_change += self.shoes.get_stats.get_flat_speed_change()
 
         if self.weapon is not None:
@@ -157,9 +156,8 @@ class Player(character.Character):
             flat_change += self.weapon.get_stats().get_flat_attack_change()
             percent_change += self.weapon.get_stats().get_percent_attack_change()
 
-            if self.hat is not None and self.hat.get_magic_effect() == "WEAPON_BOOST":
-                flat_change += self.weapon.get_stats().get_flat_attack_change() * 0.5
-            if self.accessory is not None and self.accessory.get_magic_effect() == "WEAPON_BOOST":
+            if (self.hat is not None and self.hat.get_magic_effect() == "WEAPON_BOOST") or \
+                    (self.accessory is not None and self.accessory.get_magic_effect() == "WEAPON_BOOST"):
                 flat_change += self.weapon.get_stats().get_flat_attack_change() * 0.5
 
         for active_effect in self.active_effects:
@@ -188,9 +186,8 @@ class Player(character.Character):
             flat_change += self.clothes.get_stats().get_flat_defense_change()
             percent_change += self.clothes.get_stats().get_percent_defense_change()
 
-            if self.hat is not None and self.hat.get_magic_effect() == "CLOTHES_BOOST":
-                flat_change += self.clothes.get_stats.get_flat_defense_change()
-            if self.accessory is not None and self.accessory.get_magic_effect() == "CLOTHES_BOOST":
+            if (self.hat is not None and self.hat.get_magic_effect() == "CLOTHES_BOOST") or \
+                    (self.accessory is not None and self.accessory.get_magic_effect() == "CLOTHES_BOOST"):
                 flat_change += self.clothes.get_stats.get_flat_defense_change()
 
         if self.shoes is not None:
