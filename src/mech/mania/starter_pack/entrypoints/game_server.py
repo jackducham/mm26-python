@@ -21,10 +21,6 @@ class GameServer:
             self.debug = True
         app = Flask(__name__)
 
-        @app.route('/')
-        def main_page():
-            return "Welcome to MechMania26!"
-
         @app.route('/server', methods=['POST'])
         def send_decision():
             payload = request.get_data()
@@ -71,9 +67,9 @@ class GameServer:
                 raise RuntimeError('Not running with the Werkzeug Server')
             func()
 
-        @app.route('/health')
+        @app.route('/health', methods=['GET'])
         def health():
-            return 200
+            return "200"
 
         try:
             app.run(host=self.url, port=self.port)
