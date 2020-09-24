@@ -5,7 +5,6 @@ WORKDIR /app/
 COPY src/ src
 COPY requirements.txt .
 
-RUN pip uninstall protobuf
 RUN pip install -r requirements.txt
 
 ENV PYTHONPATH=src
