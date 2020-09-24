@@ -3,7 +3,7 @@ from engine.game_state import GameState
 from protos import player_pb2
 from protos import game_pb2
 from protos import api_pb2
-import API
+import api
 import sys
 
 

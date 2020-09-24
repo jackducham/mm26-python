@@ -1,4 +1,3 @@
-from engine.characters.character_decision import CharacterDecision
 from flask import Flask, request
 import sys
 
@@ -6,8 +5,8 @@ from protos import player_pb2
 from protos import character_pb2
 from engine.game_state import GameState
 
-from strategy import Strategy
-from MemoryObject import MemoryObject
+from mech.mania.starter_pack.domain.strategy import Strategy
+from mech.mania.starter_pack.domain.memory.memory_object import MemoryObject
 
 
 class GameServer:

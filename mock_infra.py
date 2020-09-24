@@ -5,14 +5,12 @@ import requests
 import uuid
 
 from protos import infra_pb2
-from strategy import Strategy
 
 import subprocess
 import unittest
 import time
 
-from GameServer import GameServer
-from redis import Redis
+from mech.mania.starter_pack.entrypoints import GameServer
 
 INFRA_PORT = 8080
 GAME_ENGINE_IP = "localhost"
