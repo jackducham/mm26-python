@@ -1,7 +1,7 @@
 import redis
 import json
 import os
-from mech.mania.starter_pack.domain.memory.set_value_result import *
+
 
 class MemoryObject:
     DEFAULT_STRING = ""

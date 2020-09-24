@@ -5,8 +5,8 @@ from protos import player_pb2
 from protos import character_pb2
 from engine.game_state import GameState
 
-from mech.mania.starter_pack.domain.strategy import Strategy
-from mech.mania.starter_pack.domain.memory.memory_object import MemoryObject
+from src.mech.mania import Strategy
+from src.mech.mania import MemoryObject
 
 
 class GameServer:

@@ -10,7 +10,7 @@ import subprocess
 import unittest
 import time
 
-from mech.mania.starter_pack.entrypoints import GameServer
+from src.mech.mania import GameServer
 
 INFRA_PORT = 8080
 GAME_ENGINE_IP = "localhost"
