@@ -1,6 +1,7 @@
 from engine.characters.character_decision import CharacterDecision
 from flask import Flask, request
 import sys
+import time
 
 from protos import player_pb2
 from protos import character_pb2
@@ -60,13 +61,22 @@ class GameServer:
 
         @app.route('/shutdown', methods=['POST'])
         def shutdown():
-            shutdown_server()
+            # saveAndClose Redis connection
+            self.memory.save_and_close()
+
+            delay = 10000  # ms to wait before shutting down server
+            try:
+                shutdown_server(delay)
+            except Exception as e:
+                print("Failed to shutdown GameServer: " + e)
+
             return 'Server shutting down...'
 
-        def shutdown_server():
+        def shutdown_server(delay):
             func = request.environ.get('werkzeug.server.shutdown')
             if func is None:
                 raise RuntimeError('Not running with the Werkzeug Server')
+            time.sleep(delay / 1e3)
             func()
 
         try:
