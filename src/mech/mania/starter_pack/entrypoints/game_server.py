@@ -32,6 +32,8 @@ class GameServer:
             player_turn = player_pb2.PlayerTurn()
             player_turn.ParseFromString(payload)
 
+            print(f"Received playerTurn {player_turn.player_name}")
+
             game_state = GameState(player_turn.game_state)
             player_name = player_turn.player_name
 
@@ -40,7 +42,7 @@ class GameServer:
             try:
                 decision = self.strategy.make_decision(player_name, game_state)
             except:
-                print("Exception while implementing user strategy: {0}".format(sys.exc_info()[0]))
+                print("Exception making decision: {0}".format(sys.exc_info()[0]))
                 decision = None
 
             if decision is not None:
@@ -54,6 +56,8 @@ class GameServer:
             if self.debug:
                 self.atomicInt.increment()
 
+            print("Sending playerDecision")
+
             return response_msg.SerializeToString()
 
         @app.route('/shutdown', methods=['POST'])
@@ -66,6 +70,10 @@ class GameServer:
             if func is None:
                 raise RuntimeError('Not running with the Werkzeug Server')
             func()
+
+        @app.route('/health')
+        def health():
+            return 200
 
         try:
             app.run(host=self.url, port=self.port)

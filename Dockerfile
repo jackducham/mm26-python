@@ -10,3 +10,6 @@ RUN pip install -r requirements.txt
 ENV PYTHONPATH=src
 
 CMD ["python", "src/mech/mania/starter_pack/entrypoints/game_server.py", "127.0.0.1", "8000"]
+
+# docker build -t mm26/python-sp .
+# docker run mm26/python-sp:latest
