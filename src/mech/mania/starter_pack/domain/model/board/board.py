@@ -1,5 +1,5 @@
-from engine.characters.position import Position
-from protos import board_pb2
+from mech.mania.engine.domain.model import board_pb2
+from mech.mania.starter_pack.domain.model.characters.position import Position
 
 
 class Board:

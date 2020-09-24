@@ -1,7 +1,7 @@
-from engine.items.status_modifier import StatusModifier
-from engine.items.temp_status_modifier import TempStatusModifier
-from engine.items.wearable import Wearable
-from protos import item_pb2
+from mech.mania.engine.domain.model import item_pb2
+from mech.mania.starter_pack.domain.model.items.status_modifier import StatusModifier
+from mech.mania.starter_pack.domain.model.items.temp_status_modifier import TempStatusModifier
+from mech.mania.starter_pack.domain.model.items.wearable import Wearable
 
 
 class Weapon(Wearable):

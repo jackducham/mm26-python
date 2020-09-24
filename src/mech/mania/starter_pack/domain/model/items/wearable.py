@@ -1,5 +1,5 @@
-from engine.items.item import Item
-from engine.items.status_modifier import StatusModifier
+from mech.mania.starter_pack.domain.model.items.item import Item
+from mech.mania.starter_pack.domain.model.items.status_modifier import StatusModifier
 
 
 class Wearable(Item):

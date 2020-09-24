@@ -1,4 +1,4 @@
-from protos import item_pb2
+from mech.mania.engine.domain.model import item_pb2
 
 
 class StatusModifier:

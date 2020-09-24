@@ -1,14 +1,14 @@
-from engine.board.board import Board
-from engine.characters.monster import Monster
-from engine.characters.player import Player
-from protos import game_pb2
+from mech.mania.engine.domain.model import game_pb2
+from mech.mania.starter_pack.domain.model.board.board import Board
+from mech.mania.starter_pack.domain.model.characters.monster import Monster
+from mech.mania.starter_pack.domain.model.characters.player import Player
 
 
 class GameState:
     def __init__(self, game_state_proto: game_pb2.GameState):
         if not isinstance(game_state_proto, game_pb2.GameState):
             raise ValueError('Incorrect object type; expected game_pb2.GameState, got {}'.format(
-                    type(game_state_proto)))
+                type(game_state_proto)))
 
         self.board_names = {}
         for k, v in game_state_proto.board_names:

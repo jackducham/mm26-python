@@ -1,12 +1,11 @@
-from flask import Flask, request
 import sys
 
-from protos import player_pb2
-from protos import character_pb2
-from engine.game_state import GameState
-
-from src.mech.mania import Strategy
-from src.mech.mania import MemoryObject
+from flask import Flask, request
+from mech.mania.engine.domain.model import character_pb2
+from mech.mania.engine.domain.model import player_pb2
+from mech.mania.starter_pack.domain.memory.memory_object import MemoryObject
+from mech.mania.starter_pack.domain.model.game_state import GameState
+from mech.mania.starter_pack.domain.strategy import Strategy
 
 
 class GameServer:

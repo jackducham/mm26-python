@@ -1,5 +1,6 @@
-from protos import character_pb2
 import sys
+
+from mech.mania.engine.domain.model import character_pb2
 
 
 class Position:

@@ -1,7 +1,7 @@
-from engine.characters.position import Position
-from engine.items.temp_status_modifier import TempStatusModifier
-from engine.items.weapon import Weapon
-from protos import character_pb2
+from mech.mania.engine.domain.model import character_pb2
+from mech.mania.starter_pack.domain.model.characters.position import Position
+from mech.mania.starter_pack.domain.model.items.temp_status_modifier import TempStatusModifier
+from mech.mania.starter_pack.domain.model.items.weapon import Weapon
 
 
 class Character:

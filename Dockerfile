@@ -1,15 +1,13 @@
-FROM openjdk
-COPY --from=python:3 / /
+FROM python:3.8-alpine
 
-RUN pip install requests protobuf flask
+WORKDIR /app/
 
-COPY protos /protos
-COPY MM26GameEngine.jar /MM26GameEngine.jar
-COPY mock_infra.py /MockInfra.py
-COPY src/mech /GameServer.py
-COPY src/mech /strategy.py
-COPY src/mech /MemoryObject.py
-COPY src/mech /RedisWritePolicy.py
-COPY src/mech /SetValueResult.py
+COPY src/ src
+COPY requirements.txt .
 
-CMD ["python", "GameServer.py", "127.0.0.1", "8000"]
+RUN pip uninstall protobuf
+RUN pip install -r requirements.txt
+
+ENV PYTHONPATH=src
+
+CMD ["python", "src/mech/mania/starter_pack/entrypoints/game_server.py", "127.0.0.1", "8000"]

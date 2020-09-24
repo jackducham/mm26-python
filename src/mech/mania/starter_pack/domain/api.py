@@ -1,19 +1,22 @@
 import requests
-import sys
-from protos import api_pb2
-from protos import character_pb2
-from protos import game_pb2
+from mech.mania.engine.domain.model import api_pb2
+from mech.mania.engine.domain.model import character_pb2
+from mech.mania.engine.domain.model import game_pb2
+
 API_SERVER_URL = "http://127.0.0.1:8082/api/"
 
+
 def pathFinding(gameState, start, end):
-    if isinstance(gameState, game_pb2.GameState) and isinstance(start, character_pb2.Position) and isinstance(end, character_pb2.Position):
+    if isinstance(gameState, game_pb2.GameState) and isinstance(start, character_pb2.Position) and isinstance(end,
+                                                                                                              character_pb2.Position):
         url = API_SERVER_URL + "pathFinding"
         payload = api_pb2.APIPathFindingRequest()
         payload.gameState.CopyFrom(gameState)
         payload.start.CopyFrom(start)
         payload.end.CopyFrom(end)
 
-        response = requests.post(url, headers={'Content-Type': 'application/protobuf'}, data=payload.SerializeToString())
+        response = requests.post(url, headers={'Content-Type': 'application/protobuf'},
+                                 data=payload.SerializeToString())
         APIresponse = api_pb2.APIPathFindingResponse()
         APIresponse.ParseFromString(response.content)
 
