@@ -7,7 +7,12 @@ class Monster(character.Character):
 
         super().__init__(monster_proto.character)
 
+        self.monster_proto = monster_proto
+
         self.aggro_range = monster_proto.aggro_range
 
     def get_aggro_range(self):
         return self.aggro_range
+
+    def build_proto_class(self):
+        return self.monster_proto

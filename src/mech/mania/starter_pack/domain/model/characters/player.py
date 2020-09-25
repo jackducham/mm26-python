@@ -15,6 +15,8 @@ class Player(character.Character):
 
         super().__init__(player_proto.character)
 
+        self.player_proto = player_proto
+
         self.hat = Hat(player_proto.hat)
         self.accessory = Accessory(player_proto.accessory)
         self.clothes = Clothes(player_proto.clothes)
@@ -205,3 +207,6 @@ class Player(character.Character):
 
     def get_free_inventory_index(self):
         return -1 if None not in self.inventory else self.inventory.index(None)
+
+    def build_proto_class(self):
+        return self.player_proto

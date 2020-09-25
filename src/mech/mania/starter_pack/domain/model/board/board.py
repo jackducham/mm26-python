@@ -5,14 +5,16 @@ from mech.mania.starter_pack.domain.model.characters.position import Position
 class Board:
     def __init__(self, proto_board: board_pb2.Board):
 
-        width = proto_board.width
-        height = proto_board.height
+        self.proto_board = proto_board
+
+        self.width = proto_board.width
+        self.height = proto_board.height
         self.grid = []
 
-        for x in range(width):
+        for x in range(self.width):
             row = []
-            for y in range(height):
-                row.append(proto_board.grid[x * height + y])
+            for y in range(self.height):
+                row.append(proto_board.grid[x * self.height + y])
             self.grid.append(row)
 
         self.portals = []
@@ -27,3 +29,6 @@ class Board:
 
     def get_portals(self):
         return self.portals
+
+    def build_proto_class(self):
+        return self.proto_board

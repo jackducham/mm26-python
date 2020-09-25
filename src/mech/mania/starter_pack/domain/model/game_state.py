@@ -73,8 +73,47 @@ class GameState:
     def build_proto_class(self):
         game_state_builder = game_pb2.GameState()
         game_state_builder.state_id = self.turn_num
-        game_state_builder.board_names = self.board_names
-        game_state_builder.player_names = self.player_names
-        game_state_builder.monster_names = self.monster_names
+        for name, board in self.board_names.items():
+            game_state_builder.board_names[name].CopyFrom(self.board_names[name].build_proto_class())
+        for name, player in self.player_names.items():
+            game_state_builder.player_names[name].CopyFrom(self.player_names[name].build_proto_class())
+        for name, monster in self.monster_names.items():
+            game_state_builder.monster_names[name].CopyFrom(self.monster_names[name].build_proto_class())
+
+        # for name, board in self.board_names.items():
+        #     game_state_builder.board_names[name].width = board.width
+        #     game_state_builder.board_names[name].height = board.height
+        #     game_state_builder.board_names[name].grid.extend(board.grid)
+        #     game_state_builder.board_names[name].portals.extend(board.grid)
+        # for name, player in self.player_names.items():
+        #     character = game_state_builder.player_names[name].character
+        #     character.current_health = player.current_health
+        #     character.base_max_health = player.base_max_health
+        #     character.experience = player.experience
+        #     character.level = player.level
+        #     character.base_speed = player.base_speed
+        #     position = character.position
+        #     position.board_id = player.position.board_id
+        #     position.x = player.position.x
+        #     position.y = player.position.y
+        #     spawn_point = character.spawn_point
+        #     character.weapon =
+        #     character.active_effects_temp_status_modifier.extend()
+        #     character.active_effects_source.extend()
+        #     character.active_effects_is_player.extend()
+        #     for player_name, damage in player.tagged_players_damage.items():
+        #         character.tagged_players_damage[player_name] = damage
+        #     character.is_dead = player.is_dead
+        #     character.ticks_since_death = player.ticks_since_death
+        #     character.name = player.name
+        #     character.base_attack = player.base_attack
+        #     character.base_defense = player.base_defense
+        #     character.sprite = player.sprite
+        #     hat = game_state_builder.player_names[name].hat
+        #     clothes = game_state_builder.player_names[name].clothes
+        #     shoes = game_state_builder.player_names[name].shoes
+        #     game_state_builder.player_names[name].inventory.extend(player.inventory)
+        # for name, monster in self.monster_names.items():
+        #     game_state_builder.monster_names[name] = monster
 
         return game_state_builder
