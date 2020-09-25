@@ -8,7 +8,7 @@ class Board:
             raise ValueError('Incorrect object type; expected board_pb2.Board, got {}'.format(type(proto_board)))
 
         rows = proto_board.rows
-        cols = proto_board.cols
+        cols = proto_board.columns
         self.grid = []
 
         for r in range(rows):
