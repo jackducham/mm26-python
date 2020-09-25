@@ -1,5 +1,6 @@
 import sys
 import time
+import traceback
 
 from flask import Flask, request
 
@@ -39,8 +40,9 @@ class GameServer:
 
             try:
                 decision = self.strategy.make_decision(player_name, game_state)
-            except:
-                print("Exception making decision: {0}".format(sys.exc_info()[0]))
+            except Exception as err:
+                print("Exception making decision:")
+                traceback.print_tb(err.__traceback__)
                 decision = None
 
             if decision is not None:
