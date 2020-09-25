@@ -28,6 +28,7 @@ class CharacterDecision:
             decision_builder.decision_type = character_pb2.DecisionType.NONE
 
         decision_builder.index = self.action_index
-        decision_builder.target_position = self.action_position.build_proto_class()
+        if self.action_position is not None:
+            decision_builder.target_position = self.action_position.build_proto_class()
 
         return decision_builder
