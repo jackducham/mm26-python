@@ -9,18 +9,20 @@ class Board:
         cols = proto_board.columns
         self.grid = []
 
-        for r in range(rows):
+        for x in range(rows):
             row = []
-            for c in range(cols):
-                row.append(proto_board.grid[r * c + c])
+            for y in range(cols):
+                row.append(proto_board.grid[x * cols + y])
             self.grid.append(row)
 
         self.portals = []
         for i in range(len(proto_board.portals)):
-            # TODO: implement Position
             self.portals.append(Position(proto_board.portals[i]))
 
     def get_grid(self):
+        """
+        Returns a 2D array of tiles where the tile at (X, Y) is grid[X][Y]
+        """
         return self.grid
 
     def get_portals(self):

@@ -1,4 +1,4 @@
-from engine.items.Hat import Hat
+from engine.items.hat import Hat
 from engine.items.clothes import Clothes
 from engine.items.consumable import Consumable
 from engine.items.shoes import Shoes
