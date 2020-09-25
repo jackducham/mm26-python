@@ -3,7 +3,7 @@ from mech.mania.engine.domain.model import item_pb2
 
 class StatusModifier:
     def __init__(self, **kwargs):
-        if 'status_modifer_proto' in kwargs:
+        if 'status_modifer_proto' in kwargs.keys():
             status_modifier_proto = kwargs['status_modifier_proto']
             if not isinstance(status_modifier_proto, item_pb2.StatusModifier):
                 raise ValueError(
