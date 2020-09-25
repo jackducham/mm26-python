@@ -7,12 +7,6 @@ class StatusModifier:
             kwargs = kwargs['kwargs']
         if 'status_modifier_proto' in kwargs.keys():
             status_modifier_proto = kwargs['status_modifier_proto']
-            if not isinstance(status_modifier_proto, item_pb2.StatusModifier):
-                raise ValueError(
-                    'Incorrect object type; expected item_pb2.StatusModifier, got {}'.format(
-                        type(
-                            status_modifier_proto
-                        )))
 
             self.flat_regen_per_turn = status_modifier_proto.flat_regen_per_turn
             self.flat_speed_change = status_modifier_proto.flat_speed_change

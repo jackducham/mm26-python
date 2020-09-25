@@ -6,12 +6,6 @@ from mech.mania.starter_pack.domain.model.items.wearable import Wearable
 
 class Weapon(Wearable):
     def __init__(self, weapon_proto: item_pb2.Weapon):
-        if not isinstance(weapon_proto, item_pb2.Weapon):
-            raise ValueError(
-                'Incorrect object type; expected item_pb2.Weapon, got {}'.format(
-                    type(
-                        weapon_proto
-                    )))
 
         super().__init__(StatusModifier(kwargs={'status_modifier_proto': weapon_proto.stats}))
         self.range = weapon_proto.range

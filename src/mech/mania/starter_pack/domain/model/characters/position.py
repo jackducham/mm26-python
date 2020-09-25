@@ -5,12 +5,6 @@ from mech.mania.engine.domain.model import character_pb2
 
 class Position:
     def __init__(self, position_proto: character_pb2.Position):
-        if not isinstance(position_proto, character_pb2.Position):
-            raise ValueError(
-                'Incorrect object type; expected character_pb2.Position, got {}'.format(
-                    type(
-                        position_proto
-                    )))
 
         self.x = position_proto.x
         self.y = position_proto.y

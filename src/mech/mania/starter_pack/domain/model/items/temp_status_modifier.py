@@ -4,12 +4,6 @@ from mech.mania.starter_pack.domain.model.items.status_modifier import StatusMod
 
 class TempStatusModifier(StatusModifier):
     def __init__(self, temp_status_modifier_proto: item_pb2.TempStatusModifier):
-        if not isinstance(temp_status_modifier_proto, item_pb2.TempStatusModifier):
-            raise ValueError(
-                'Incorrect object type; expected item_pb2.TempStatusModifier, got {}'.format(
-                    type(
-                        temp_status_modifier_proto
-                    )))
         super().__init__(
             kwargs={'status_modifier_proto': temp_status_modifier_proto.stats}
         )

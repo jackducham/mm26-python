@@ -6,12 +6,6 @@ from mech.mania.starter_pack.domain.model.items.weapon import Weapon
 
 class Character:
     def __init__(self, character_proto: character_pb2.Character):
-        if not isinstance(character_proto, character_pb2.Character):
-            raise ValueError(
-                'Incorrect object type; expected character_pb2.Character, got {}'.format(
-                    type(
-                        character_proto
-                    )))
 
         self.name = character_proto.name
 

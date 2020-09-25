@@ -6,9 +6,6 @@ from mech.mania.starter_pack.domain.model.characters.player import Player
 
 class GameState:
     def __init__(self, game_state_proto: game_pb2.GameState):
-        if not isinstance(game_state_proto, game_pb2.GameState):
-            raise ValueError('Incorrect object type; expected game_pb2.GameState, got {}'.format(
-                type(game_state_proto)))
 
         self.board_names = {}
         for k, v in game_state_proto.board_names.items():

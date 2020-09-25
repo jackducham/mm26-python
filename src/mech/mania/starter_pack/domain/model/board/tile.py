@@ -9,8 +9,6 @@ from protos import item_pb2
 
 class Tile:
     def __init__(self, proto_tile: board_pb2.Tile):
-        if not isinstance(proto_tile, board_pb2.Tile):
-            raise ValueError('Incorrect object type; expected board_pb2.Tile, got {}'.format(type(proto_tile)))
 
         self.items = []
         for item in proto_tile.items:

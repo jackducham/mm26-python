@@ -12,12 +12,6 @@ class Player(character.Character):
     INVENTORY_SIZE = 16
 
     def __init__(self, player_proto: character_pb2.Player):
-        if not isinstance(player_proto, character_pb2.Character):
-            raise ValueError(
-                'Incorrect object type; expected character_pb2.Player, got {}'.format(
-                    type(
-                        player_proto
-                    )))
 
         super().__init__(player_proto.character)
 

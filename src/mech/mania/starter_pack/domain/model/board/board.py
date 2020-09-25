@@ -4,8 +4,6 @@ from mech.mania.starter_pack.domain.model.characters.position import Position
 
 class Board:
     def __init__(self, proto_board: board_pb2.Board):
-        if not isinstance(proto_board, board_pb2.Board):
-            raise ValueError('Incorrect object type; expected board_pb2.Board, got {}'.format(type(proto_board)))
 
         rows = proto_board.rows
         cols = proto_board.columns
