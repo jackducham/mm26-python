@@ -1,4 +1,6 @@
-from engine.items.Hat import Hat
+from os import access
+from engine.items.accessory import Accessory
+from engine.items.hat import Hat
 from engine.items.clothes import Clothes
 from engine.items.consumable import Consumable
 from engine.items.shoes import Shoes
@@ -22,6 +24,7 @@ class Player(character.Character):
         super().__init__(player_proto.character)
 
         self.hat = Hat(player_proto.hat)
+        self.accessory = Accessory(player_proto.accessory)
         self.clothes = Clothes(player_proto.clothes)
         self.shoes = Shoes(player_proto.shoes)
         self.inventory = [] * self.INVENTORY_SIZE
@@ -31,6 +34,8 @@ class Player(character.Character):
                 self.inventory[i] = Clothes(item.clothes)
             elif isinstance(item, item_pb2.Hat):
                 self.inventory[i] = Hat(item.hat)
+            elif isinstance(item, item_pb2.Accessory):
+                self.inventory[i] = Accessory(item.accessory)
             elif isinstance(item, item_pb2.Shoes):
                 self.inventory[i] = Shoes(item.shoes)
             elif isinstance(item, item_pb2.Weapon):
@@ -40,6 +45,9 @@ class Player(character.Character):
 
     def get_hat(self):
         return self.hat
+
+    def get_accessory(self):
+        return self.accessory
 
     def get_clothes(self):
         return self.clothes
@@ -53,6 +61,11 @@ class Player(character.Character):
     def get_inventory(self):
         return self.inventory
 
+    def has_magic_effect(self, effect):
+        return isinstance(effect, str) and (
+            (self.hat is not None and self.hat.get_magic_effect == effect)
+            or (self.accessory is not None and self.accessory.get_magic_effect == effect))
+
     def get_speed(self):
         flat_change = 0
         percent_change = 0
@@ -60,6 +73,10 @@ class Player(character.Character):
         if self.hat is not None:
             flat_change += self.hat.get_stats().get_flat_speed_change()
             percent_change += self.hat.get_stats().get_percent_speed_change()
+
+        if self.accessory is not None:
+            flat_change += self.accessory.get_stats().get_flat_speed_change()
+            percent_change += self.accessory.get_stats().get_percent_speed_change()
 
         if self.clothes is not None:
             flat_change += self.clothes.get_stats().get_flat_speed_change()
@@ -69,7 +86,7 @@ class Player(character.Character):
             flat_change += self.shoes.get_stats.get_flat_speed_change()
             percent_change += self.shoes.get_stats().get_percent_speed_change()
 
-            if self.hat is not None and self.hat.get_hat_effect == "SHOES_BOOST":
+            if (self.has_magic_effect("SHOES_BOOST")):
                 flat_change += self.shoes.get_stats.get_flat_speed_change()
 
         if self.weapon is not None:
@@ -93,6 +110,10 @@ class Player(character.Character):
         if self.hat is not None:
             flat_change += self.hat.get_stats().get_flat_health_change()
             percent_change += self.hat.get_stats().get_percent_health_change()
+
+        if self.accessory is not None:
+            flat_change += self.accessory.get_stats().get_flat_health_change()
+            percent_change += self.accessory.get_stats().get_percent_health_change()
 
         if self.clothes is not None:
             flat_change += self.clothes.get_stats().get_flat_health_change()
@@ -124,6 +145,10 @@ class Player(character.Character):
             flat_change += self.hat.get_stats().get_flat_attack_change()
             percent_change += self.hat.get_stats().get_percent_attack_change()
 
+        if self.accessory is not None:
+            flat_change += self.accessory.get_stats().get_flat_attack_change()
+            percent_change += self.accessory.get_stats().get_percent_attack_change()
+
         if self.clothes is not None:
             flat_change += self.clothes.get_stats().get_flat_attack_change()
             percent_change += self.clothes.get_stats().get_percent_attack_change()
@@ -136,7 +161,7 @@ class Player(character.Character):
             flat_change += self.weapon.get_stats().get_flat_attack_change()
             percent_change += self.weapon.get_stats().get_percent_attack_change()
 
-            if self.hat is not None and self.hat.get_hat_effect() == "WEAPON_BOOST":
+            if (self.has_magic_effect("WEAPON_BOOST")):
                 flat_change += self.weapon.get_stats().get_flat_attack_change() * 0.5
 
         for active_effect in self.active_effects:
@@ -157,11 +182,15 @@ class Player(character.Character):
             flat_change += self.hat.get_stats().get_flat_defense_change()
             percent_change += self.hat.get_stats().get_percent_defense_change()
 
+        if self.accessory is not None:
+            flat_change += self.accessory.get_stats().get_flat_defense_change()
+            percent_change += self.accessory.get_stats().get_percent_defense_change()
+
         if self.clothes is not None:
             flat_change += self.clothes.get_stats().get_flat_defense_change()
             percent_change += self.clothes.get_stats().get_percent_defense_change()
 
-            if self.hat is not None and self.hat.get_hat_effect == "CLOTHES_BOOST":
+            if (self.has_magic_effect("CLOTHES_BOOST")):
                 flat_change += self.clothes.get_stats.get_flat_defense_change()
 
         if self.shoes is not None:

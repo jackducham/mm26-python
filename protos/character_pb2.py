@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='character',
   syntax='proto3',
   serialized_options=b'\n\036mech.mania.engine.domain.modelB\017CharacterProtos\252\002\016MM26.IO.Models',
-  serialized_pb=b'\n\x0f\x63haracter.proto\x12\tcharacter\x1a\nitem.proto\"\xd9\x04\n\tCharacter\x12\x16\n\x0e\x63urrent_health\x18\x01 \x01(\x05\x12\x17\n\x0f\x62\x61se_max_health\x18\x02 \x01(\x05\x12\x12\n\nexperience\x18\x03 \x01(\x05\x12\r\n\x05level\x18\x04 \x01(\x05\x12\x12\n\nbase_speed\x18\x05 \x01(\x05\x12%\n\x08position\x18\x06 \x01(\x0b\x32\x13.character.Position\x12(\n\x0bspawn_point\x18\x07 \x01(\x0b\x32\x13.character.Position\x12\x1c\n\x06weapon\x18\x08 \x01(\x0b\x32\x0c.item.Weapon\x12\x45\n#active_effects_temp_status_modifier\x18\t \x03(\x0b\x32\x18.item.TempStatusModifier\x12\x1d\n\x15\x61\x63tive_effects_source\x18\n \x03(\t\x12 \n\x18\x61\x63tive_effects_is_player\x18\x0b \x03(\x08\x12L\n\x15tagged_players_damage\x18\x0c \x03(\x0b\x32-.character.Character.TaggedPlayersDamageEntry\x12\x0f\n\x07is_dead\x18\r \x01(\x08\x12\x19\n\x11ticks_since_death\x18\x0e \x01(\x05\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x13\n\x0b\x62\x61se_attack\x18\x10 \x01(\x05\x12\x14\n\x0c\x62\x61se_defense\x18\x11 \x01(\x05\x1a:\n\x18TaggedPlayersDamageEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x05:\x02\x38\x01\"b\n\x07Monster\x12\'\n\tcharacter\x18\x01 \x01(\x0b\x32\x14.character.Character\x12\x19\n\x05\x64rops\x18\x02 \x03(\x0b\x32\n.item.Item\x12\x13\n\x0b\x61ggro_range\x18\x03 \x01(\x05\"\xa4\x01\n\x06Player\x12\'\n\tcharacter\x18\x01 \x01(\x0b\x32\x14.character.Character\x12\x16\n\x03hat\x18\x02 \x01(\x0b\x32\t.item.Hat\x12\x1e\n\x07\x63lothes\x18\x03 \x01(\x0b\x32\r.item.Clothes\x12\x1a\n\x05shoes\x18\x04 \x01(\x0b\x32\x0b.item.Shoes\x12\x1d\n\tinventory\x18\x05 \x03(\x0b\x32\n.item.Item\"\xc6\x01\n\x0bPlayerStats\x12\r\n\x05level\x18\x01 \x01(\x05\x12\x12\n\nexperience\x18\x02 \x01(\x05\x12\x16\n\x0emonsters_slain\x18\x03 \x01(\x05\x12\x0e\n\x06\x61ttack\x18\x04 \x01(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x05 \x01(\x05\x12\x16\n\x0e\x63urrent_health\x18\x06 \x01(\x05\x12\x12\n\nmax_health\x18\x07 \x01(\x05\x12\x13\n\x0b\x64\x65\x61th_count\x18\x08 \x01(\x05\x12\x1a\n\x12turns_since_joined\x18\t \x01(\x05\"\x91\x01\n\x11PlayerStatsBundle\x12\x36\n\x05stats\x18\x01 \x03(\x0b\x32\'.character.PlayerStatsBundle.StatsEntry\x1a\x44\n\nStatsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12%\n\x05value\x18\x02 \x01(\x0b\x32\x16.character.PlayerStats:\x02\x38\x01\"2\n\x08Position\x12\x10\n\x08\x62oard_id\x18\x01 \x01(\t\x12\t\n\x01x\x18\x02 \x01(\x05\x12\t\n\x01y\x18\x03 \x01(\x05\"\x80\x01\n\x11\x43haracterDecision\x12.\n\rdecision_type\x18\x01 \x01(\x0e\x32\x17.character.DecisionType\x12,\n\x0ftarget_position\x18\x02 \x01(\x0b\x32\x13.character.Position\x12\r\n\x05index\x18\x03 \x01(\x05*[\n\x0c\x44\x65\x63isionType\x12\x08\n\x04NONE\x10\x00\x12\x08\n\x04MOVE\x10\x01\x12\n\n\x06\x41TTACK\x10\x02\x12\n\n\x06PORTAL\x10\x03\x12\x08\n\x04\x44ROP\x10\x04\x12\t\n\x05\x45QUIP\x10\x05\x12\n\n\x06PICKUP\x10\x06\x42\x42\n\x1emech.mania.engine.domain.modelB\x0f\x43haracterProtos\xaa\x02\x0eMM26.IO.Modelsb\x06proto3'
+  serialized_pb=b'\n\x0f\x63haracter.proto\x12\tcharacter\x1a\nitem.proto\"\xe9\x04\n\tCharacter\x12\x16\n\x0e\x63urrent_health\x18\x01 \x01(\x05\x12\x17\n\x0f\x62\x61se_max_health\x18\x02 \x01(\x05\x12\x12\n\nexperience\x18\x03 \x01(\x05\x12\r\n\x05level\x18\x04 \x01(\x05\x12\x12\n\nbase_speed\x18\x05 \x01(\x05\x12%\n\x08position\x18\x06 \x01(\x0b\x32\x13.character.Position\x12(\n\x0bspawn_point\x18\x07 \x01(\x0b\x32\x13.character.Position\x12\x1c\n\x06weapon\x18\x08 \x01(\x0b\x32\x0c.item.Weapon\x12\x45\n#active_effects_temp_status_modifier\x18\t \x03(\x0b\x32\x18.item.TempStatusModifier\x12\x1d\n\x15\x61\x63tive_effects_source\x18\n \x03(\t\x12 \n\x18\x61\x63tive_effects_is_player\x18\x0b \x03(\x08\x12L\n\x15tagged_players_damage\x18\x0c \x03(\x0b\x32-.character.Character.TaggedPlayersDamageEntry\x12\x0f\n\x07is_dead\x18\r \x01(\x08\x12\x19\n\x11ticks_since_death\x18\x0e \x01(\x05\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x13\n\x0b\x62\x61se_attack\x18\x10 \x01(\x05\x12\x14\n\x0c\x62\x61se_defense\x18\x11 \x01(\x05\x12\x0e\n\x06sprite\x18\x12 \x01(\t\x1a:\n\x18TaggedPlayersDamageEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x05:\x02\x38\x01\"b\n\x07Monster\x12\'\n\tcharacter\x18\x01 \x01(\x0b\x32\x14.character.Character\x12\x19\n\x05\x64rops\x18\x02 \x03(\x0b\x32\n.item.Item\x12\x13\n\x0b\x61ggro_range\x18\x03 \x01(\x05\"\xc8\x01\n\x06Player\x12\'\n\tcharacter\x18\x01 \x01(\x0b\x32\x14.character.Character\x12\x16\n\x03hat\x18\x02 \x01(\x0b\x32\t.item.Hat\x12\x1e\n\x07\x63lothes\x18\x03 \x01(\x0b\x32\r.item.Clothes\x12\x1a\n\x05shoes\x18\x04 \x01(\x0b\x32\x0b.item.Shoes\x12\"\n\taccessory\x18\x05 \x01(\x0b\x32\x0f.item.Accessory\x12\x1d\n\tinventory\x18\x06 \x03(\x0b\x32\n.item.Item\"\xc6\x01\n\x0bPlayerStats\x12\r\n\x05level\x18\x01 \x01(\x05\x12\x12\n\nexperience\x18\x02 \x01(\x05\x12\x16\n\x0emonsters_slain\x18\x03 \x01(\x05\x12\x0e\n\x06\x61ttack\x18\x04 \x01(\x05\x12\x0f\n\x07\x64\x65\x66\x65nse\x18\x05 \x01(\x05\x12\x16\n\x0e\x63urrent_health\x18\x06 \x01(\x05\x12\x12\n\nmax_health\x18\x07 \x01(\x05\x12\x13\n\x0b\x64\x65\x61th_count\x18\x08 \x01(\x05\x12\x1a\n\x12turns_since_joined\x18\t \x01(\x05\"\x91\x01\n\x11PlayerStatsBundle\x12\x36\n\x05stats\x18\x01 \x03(\x0b\x32\'.character.PlayerStatsBundle.StatsEntry\x1a\x44\n\nStatsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12%\n\x05value\x18\x02 \x01(\x0b\x32\x16.character.PlayerStats:\x02\x38\x01\"2\n\x08Position\x12\x10\n\x08\x62oard_id\x18\x01 \x01(\t\x12\t\n\x01x\x18\x02 \x01(\x05\x12\t\n\x01y\x18\x03 \x01(\x05\"\x80\x01\n\x11\x43haracterDecision\x12.\n\rdecision_type\x18\x01 \x01(\x0e\x32\x17.character.DecisionType\x12,\n\x0ftarget_position\x18\x02 \x01(\x0b\x32\x13.character.Position\x12\r\n\x05index\x18\x03 \x01(\x05*[\n\x0c\x44\x65\x63isionType\x12\x08\n\x04NONE\x10\x00\x12\x08\n\x04MOVE\x10\x01\x12\n\n\x06\x41TTACK\x10\x02\x12\n\n\x06PORTAL\x10\x03\x12\x08\n\x04\x44ROP\x10\x04\x12\t\n\x05\x45QUIP\x10\x05\x12\n\n\x06PICKUP\x10\x06\x42\x42\n\x1emech.mania.engine.domain.modelB\x0f\x43haracterProtos\xaa\x02\x0eMM26.IO.Modelsb\x06proto3'
   ,
   dependencies=[item__pb2.DESCRIPTOR,])
 
@@ -61,8 +61,8 @@ _DECISIONTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1445,
-  serialized_end=1536,
+  serialized_start=1497,
+  serialized_end=1588,
 )
 _sym_db.RegisterEnumDescriptor(_DECISIONTYPE)
 
@@ -110,8 +110,8 @@ _CHARACTER_TAGGEDPLAYERSDAMAGEENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=586,
-  serialized_end=644,
+  serialized_start=602,
+  serialized_end=660,
 )
 
 _CHARACTER = _descriptor.Descriptor(
@@ -240,6 +240,13 @@ _CHARACTER = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='sprite', full_name='character.Character.sprite', index=17,
+      number=18, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -253,7 +260,7 @@ _CHARACTER = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=43,
-  serialized_end=644,
+  serialized_end=660,
 )
 
 
@@ -297,8 +304,8 @@ _MONSTER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=646,
-  serialized_end=744,
+  serialized_start=662,
+  serialized_end=760,
 )
 
 
@@ -338,8 +345,15 @@ _PLAYER = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='inventory', full_name='character.Player.inventory', index=4,
-      number=5, type=11, cpp_type=10, label=3,
+      name='accessory', full_name='character.Player.accessory', index=4,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='inventory', full_name='character.Player.inventory', index=5,
+      number=6, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -356,8 +370,8 @@ _PLAYER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=747,
-  serialized_end=911,
+  serialized_start=763,
+  serialized_end=963,
 )
 
 
@@ -443,8 +457,8 @@ _PLAYERSTATS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=914,
-  serialized_end=1112,
+  serialized_start=966,
+  serialized_end=1164,
 )
 
 
@@ -481,8 +495,8 @@ _PLAYERSTATSBUNDLE_STATSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1192,
-  serialized_end=1260,
+  serialized_start=1244,
+  serialized_end=1312,
 )
 
 _PLAYERSTATSBUNDLE = _descriptor.Descriptor(
@@ -511,8 +525,8 @@ _PLAYERSTATSBUNDLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1115,
-  serialized_end=1260,
+  serialized_start=1167,
+  serialized_end=1312,
 )
 
 
@@ -556,8 +570,8 @@ _POSITION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1262,
-  serialized_end=1312,
+  serialized_start=1314,
+  serialized_end=1364,
 )
 
 
@@ -601,8 +615,8 @@ _CHARACTERDECISION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1315,
-  serialized_end=1443,
+  serialized_start=1367,
+  serialized_end=1495,
 )
 
 _CHARACTER_TAGGEDPLAYERSDAMAGEENTRY.containing_type = _CHARACTER
@@ -617,6 +631,7 @@ _PLAYER.fields_by_name['character'].message_type = _CHARACTER
 _PLAYER.fields_by_name['hat'].message_type = item__pb2._HAT
 _PLAYER.fields_by_name['clothes'].message_type = item__pb2._CLOTHES
 _PLAYER.fields_by_name['shoes'].message_type = item__pb2._SHOES
+_PLAYER.fields_by_name['accessory'].message_type = item__pb2._ACCESSORY
 _PLAYER.fields_by_name['inventory'].message_type = item__pb2._ITEM
 _PLAYERSTATSBUNDLE_STATSENTRY.fields_by_name['value'].message_type = _PLAYERSTATS
 _PLAYERSTATSBUNDLE_STATSENTRY.containing_type = _PLAYERSTATSBUNDLE
