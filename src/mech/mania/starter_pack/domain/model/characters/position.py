@@ -16,7 +16,6 @@ class Position:
         position_builder.y = self.y
         position_builder.board_id = self.board_id
 
-        # TODO: not sure if SerializeToString() should be called here or not
         return position_builder
 
     def get_x(self):

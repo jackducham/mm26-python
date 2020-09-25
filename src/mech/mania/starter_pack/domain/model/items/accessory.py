@@ -4,7 +4,7 @@ from mech.mania.engine.domain.model import item_pb2
 
 
 class Accessory(Wearable):
-    # TODO add documentation for these
+    # For details, see https://github.com/jackducham/mm26-design/wiki/Magic-Effects
     magic_effect_types = ["LINGERING_POTIONS", "SHOES_BOOST", "CLOTHES_BOOST",
                           "WEAPON_BOOST", "TRIPLED_ON_HIT", "STACKING_BONUS", "NONE"]
 
