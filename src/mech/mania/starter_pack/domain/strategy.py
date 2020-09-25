@@ -7,14 +7,13 @@ class Strategy:
     def __init__(self, memory):
         self.memory = memory
 
-    def make_decision(self, player_name, game_state, game_state_proto):
+    def make_decision(self, player_name, game_state):
         """
         Parameters:
         player_name (string): The name of your player
         game_state (GameState): The current game state
-        game_state_proto (game_pb2.GameState)
         """
-        api = API(game_state_proto)
+        api = API(game_state, player_name)
         # TODO: Implement your strategy here!
 
         decision = CharacterDecision(

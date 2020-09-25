@@ -38,7 +38,7 @@ class GameServer:
             response_msg = character_pb2.CharacterDecision()
 
             try:
-                decision = self.strategy.make_decision(player_name, game_state, player_turn.game_state)
+                decision = self.strategy.make_decision(player_name, game_state)
             except:
                 print("Exception making decision: {0}".format(sys.exc_info()[0]))
                 decision = None

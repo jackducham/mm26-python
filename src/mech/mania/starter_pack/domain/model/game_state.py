@@ -7,6 +7,8 @@ from mech.mania.starter_pack.domain.model.characters.player import Player
 class GameState:
     def __init__(self, game_state_proto: game_pb2.GameState):
 
+        self.turn_num = game_state_proto.state_id
+
         self.board_names = {}
         for k, v in game_state_proto.board_names.items():
             self.board_names[k] = Board(v)
@@ -19,6 +21,9 @@ class GameState:
 
         for k, v in game_state_proto.player_names.items():
             self.player_names[k] = Player(v)
+
+    def get_turn_num(self):
+        return self.turn_num
 
     def get_pvp_board(self):
         return self.board_names['pvp']
@@ -64,3 +69,12 @@ class GameState:
             return []
 
         return [monster for monster in self.monster_names.values() if monster.position.board_id == board_id]
+
+    def build_proto_class(self):
+        game_state_builder = game_pb2.GameState()
+        game_state_builder.state_id = self.state_id
+        game_state_builder.board_names = self.board_names
+        game_state_builder.player_names = self.player_names
+        game_state_builder.monster_names = self.monster_names
+
+        return game_state_builder
