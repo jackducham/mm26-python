@@ -14,8 +14,6 @@ class GameState:
         for k, v in game_state_proto.board_names.items():
             self.board_names[k] = Board(v)
 
-        self.turn_number = game_state_proto.turn_number
-
         self.player_names = {}
         self.monster_names = {}
 
@@ -69,6 +67,3 @@ class GameState:
             return []
 
         return [monster for monster in self.monster_names.values() if monster.position.board_id == board_id]
-
-    def get_turn_number(self):
-        return self.turn_number
