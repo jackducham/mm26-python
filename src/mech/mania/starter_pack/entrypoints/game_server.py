@@ -2,11 +2,12 @@ import sys
 import time
 
 from flask import Flask, request
-from mech.mania.engine.domain.model import character_pb2
-from mech.mania.engine.domain.model import player_pb2
+
 from mech.mania.starter_pack.domain.memory.memory_object import MemoryObject
 from mech.mania.starter_pack.domain.model.game_state import GameState
 from mech.mania.starter_pack.domain.strategy import Strategy
+from mech.mania.engine.domain.model import character_pb2
+from mech.mania.engine.domain.model import player_pb2
 
 
 class GameServer:
@@ -37,7 +38,7 @@ class GameServer:
             response_msg = character_pb2.CharacterDecision()
 
             try:
-                decision = self.strategy.make_decision(player_name, game_state)
+                decision = self.strategy.make_decision(player_name, game_state, player_turn.game_state)
             except:
                 print("Exception making decision: {0}".format(sys.exc_info()[0]))
                 decision = None
@@ -47,7 +48,6 @@ class GameServer:
             else:
                 # Build NONE decision if contestant code failed
                 response_msg.decision_type = character_pb2.NONE
-                response_msg.action_position = None
                 response_msg.index = -1
 
             if self.debug:

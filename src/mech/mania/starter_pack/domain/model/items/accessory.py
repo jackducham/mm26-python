@@ -9,7 +9,7 @@ class Accessory(Wearable):
                           "WEAPON_BOOST", "TRIPLED_ON_HIT", "STACKING_BONUS", "NONE"]
 
     def __init__(self, accessory_proto: item_pb2.Accessory):
-        if not isinstance(accessory_proto, item_pb2.Hat):
+        if not isinstance(accessory_proto, item_pb2.Accessory):
             raise ValueError('Incorrect object type; expected item_pb2.Accessory, got {}'.format(type(accessory_proto)))
         super().__init__(StatusModifier(kwargs={'status_modifier_proto': accessory_proto.stats}))
 
