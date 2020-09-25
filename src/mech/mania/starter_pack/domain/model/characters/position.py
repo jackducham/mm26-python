@@ -4,8 +4,25 @@ from mech.mania.engine.domain.model import character_pb2
 
 
 class Position:
-    def __init__(self, position_proto: character_pb2.Position):
+    def __init__(self, x: int, y: int, board_id: str, position_proto: character_pb2.Position = None):
+        if position_proto is not None:
+            self.x = position_proto.x
+            self.y = position_proto.y
+            self.board_id = position_proto.board_id
+        else:
+            self.x = x
+            self.y = y
+            self.board_id = board_id
 
+    @classmethod
+    def create(cls, x, y, board_id):
+        temp = character_pb2.Position()
+        temp.x = x
+        temp.y = y
+        temp.board_id = board_id
+        return cls(temp)
+
+    def build_from_proto(self, position_proto: character_pb2.Position):
         self.x = position_proto.x
         self.y = position_proto.y
         self.board_id = position_proto.board_id

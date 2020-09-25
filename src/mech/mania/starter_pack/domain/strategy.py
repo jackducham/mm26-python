@@ -1,4 +1,6 @@
 from mech.mania.starter_pack.domain.model.characters.character_decision import CharacterDecision
+from mech.mania.starter_pack.domain.model.characters.position import Position
+from mech.mania.starter_pack.domain.api import API
 
 
 class Strategy:
@@ -11,7 +13,8 @@ class Strategy:
         player_name (string): The name of your player
         game_state (GameState): The current game state
         """
-
+        api = API(game_state, player_name)
+        my_player = game_state.get_all_players()[player_name]
         # TODO: Implement your strategy here!
 
         decision = CharacterDecision(

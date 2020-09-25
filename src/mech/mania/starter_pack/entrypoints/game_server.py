@@ -1,16 +1,22 @@
 import sys
 import time
+import traceback
+import logging
 
 from flask import Flask, request
-from mech.mania.engine.domain.model import character_pb2
-from mech.mania.engine.domain.model import player_pb2
+
 from mech.mania.starter_pack.domain.memory.memory_object import MemoryObject
 from mech.mania.starter_pack.domain.model.game_state import GameState
 from mech.mania.starter_pack.domain.strategy import Strategy
+from mech.mania.engine.domain.model import character_pb2
+from mech.mania.engine.domain.model import player_pb2
 
 
 class GameServer:
     def __init__(self, url, port, testing_objects=None):
+        log = logging.getLogger('werkzeug')
+        log.setLevel(logging.ERROR)
+
         self.url = url
         self.port = port
         self.debug = False
@@ -29,7 +35,7 @@ class GameServer:
             player_turn = player_pb2.PlayerTurn()
             player_turn.ParseFromString(payload)
 
-            print(f"Received playerTurn {player_turn.player_name}")
+            print(f"Received playerTurn for player: {player_turn.player_name}, turn: {player_turn.game_state.state_id}")
 
             game_state = GameState(player_turn.game_state)
             player_name = player_turn.player_name
@@ -38,8 +44,9 @@ class GameServer:
 
             try:
                 decision = self.strategy.make_decision(player_name, game_state)
-            except:
-                print("Exception making decision: {0}".format(sys.exc_info()[0]))
+            except Exception as err:
+                print("Exception making decision:")
+                traceback.print_exc()
                 decision = None
 
             if decision is not None:
@@ -47,7 +54,6 @@ class GameServer:
             else:
                 # Build NONE decision if contestant code failed
                 response_msg.decision_type = character_pb2.NONE
-                response_msg.action_position = None
                 response_msg.index = -1
 
             if self.debug:
