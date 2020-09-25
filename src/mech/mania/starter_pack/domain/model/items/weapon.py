@@ -12,6 +12,7 @@ class Weapon(Wearable):
         self.splash_radius = weapon_proto.splash_radius
         self.on_hit_effect = TempStatusModifier(weapon_proto.on_hit_effect)
         self.attack = weapon_proto.attack
+        self.turns_to_deletion = weapon_proto.turns_to_deletion
 
     def get_range(self):
         return self.range

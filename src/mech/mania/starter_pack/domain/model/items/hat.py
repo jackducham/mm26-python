@@ -12,6 +12,7 @@ class Hat(Wearable):
         super().__init__(StatusModifier(kwargs={'status_modifier_proto': hat_proto.stats}))
 
         self.magic_effect = hat_proto.magic_effect
+        self.turns_to_deletion = hat_proto.turns_to_deletion
 
     def magic_hat_effect(self):
         return self.magic_effect

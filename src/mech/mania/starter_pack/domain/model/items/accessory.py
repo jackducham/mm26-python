@@ -14,6 +14,7 @@ class Accessory(Wearable):
         super().__init__(StatusModifier(kwargs={'status_modifier_proto': accessory_proto.stats}))
 
         self.magic_effect = accessory_proto.magic_effect
+        self.turns_to_deletion = accessory_proto.turns_to_deletion
 
     def get_magic_effect(self):
         return self.magic_effect

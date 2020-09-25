@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='item',
   syntax='proto3',
   serialized_options=_b('\n\036mech.mania.engine.domain.modelB\nItemProtos\252\002\016MM26.IO.Models'),
-  serialized_pb=_b('\n\nitem.proto\x12\x04item\"\xd6\x01\n\x04Item\x12 \n\x07\x63lothes\x18\x03 \x01(\x0b\x32\r.item.ClothesH\x00\x12\x18\n\x03hat\x18\x04 \x01(\x0b\x32\t.item.HatH\x00\x12\x1c\n\x05shoes\x18\x05 \x01(\x0b\x32\x0b.item.ShoesH\x00\x12\x1e\n\x06weapon\x18\x06 \x01(\x0b\x32\x0c.item.WeaponH\x00\x12&\n\nconsumable\x18\x07 \x01(\x0b\x32\x10.item.ConsumableH\x00\x12$\n\taccessory\x18\x08 \x01(\x0b\x32\x0f.item.AccessoryH\x00\x42\x06\n\x04item\"Q\n\x07\x43lothes\x12\x11\n\tmax_stack\x18\x01 \x01(\x05\x12#\n\x05stats\x18\x02 \x01(\x0b\x32\x14.item.StatusModifier\x12\x0e\n\x06sprite\x18\x03 \x01(\t\"v\n\x03Hat\x12\x11\n\tmax_stack\x18\x01 \x01(\x05\x12#\n\x05stats\x18\x02 \x01(\x0b\x32\x14.item.StatusModifier\x12\'\n\x0cmagic_effect\x18\x03 \x01(\x0e\x32\x11.item.MagicEffect\x12\x0e\n\x06sprite\x18\x04 \x01(\t\"l\n\tAccessory\x12\x11\n\tmax_stack\x18\x01 \x01(\x05\x12#\n\x05stats\x18\x02 \x01(\x0b\x32\x14.item.StatusModifier\x12\'\n\x0cmagic_effect\x18\x03 \x01(\x0e\x32\x11.item.MagicEffect\"O\n\x05Shoes\x12\x11\n\tmax_stack\x18\x01 \x01(\x05\x12#\n\x05stats\x18\x02 \x01(\x0b\x32\x14.item.StatusModifier\x12\x0e\n\x06sprite\x18\x03 \x01(\t\"\xb7\x01\n\x06Weapon\x12\x11\n\tmax_stack\x18\x01 \x01(\x05\x12#\n\x05stats\x18\x02 \x01(\x0b\x32\x14.item.StatusModifier\x12\r\n\x05range\x18\x03 \x01(\x05\x12\x15\n\rsplash_radius\x18\x04 \x01(\x05\x12\x0e\n\x06\x61ttack\x18\x05 \x01(\x05\x12/\n\ron_hit_effect\x18\x06 \x01(\x0b\x32\x18.item.TempStatusModifier\x12\x0e\n\x06sprite\x18\x07 \x01(\t\"i\n\nConsumable\x12\x11\n\tmax_stack\x18\x01 \x01(\x05\x12(\n\x06\x65\x66\x66\x65\x63t\x18\x02 \x01(\x0b\x32\x18.item.TempStatusModifier\x12\x0e\n\x06stacks\x18\x03 \x01(\x05\x12\x0e\n\x06sprite\x18\x04 \x01(\t\"\xdc\x02\n\x0eStatusModifier\x12\x19\n\x11\x66lat_speed_change\x18\x01 \x01(\x05\x12\x1c\n\x14percent_speed_change\x18\x02 \x01(\x01\x12\x1a\n\x12\x66lat_health_change\x18\x03 \x01(\x05\x12\x1d\n\x15percent_health_change\x18\x04 \x01(\x01\x12\x1e\n\x16\x66lat_experience_change\x18\x05 \x01(\x05\x12!\n\x19percent_experience_change\x18\x06 \x01(\x01\x12\x1a\n\x12\x66lat_attack_change\x18\x07 \x01(\x05\x12\x1d\n\x15percent_attack_change\x18\x08 \x01(\x01\x12\x1b\n\x13\x66lat_defense_change\x18\t \x01(\x05\x12\x1e\n\x16percent_defense_change\x18\n \x01(\x01\x12\x1b\n\x13\x66lat_regen_per_turn\x18\x0b \x01(\x05\"\xa9\x01\n\x12TempStatusModifier\x12#\n\x05stats\x18\x01 \x01(\x0b\x32\x14.item.StatusModifier\x12\x1c\n\x14\x66lat_damage_per_turn\x18\x02 \x01(\x05\x12\x1f\n\x17percent_damage_per_turn\x18\x03 \x01(\x01\x12\x1b\n\x13\x66lat_regen_per_turn\x18\x04 \x01(\x05\x12\x12\n\nturns_left\x18\x05 \x01(\x05*\x8c\x01\n\x0bMagicEffect\x12\x15\n\x11LINGERING_POTIONS\x10\x00\x12\x0f\n\x0bSHOES_BOOST\x10\x01\x12\x11\n\rCLOTHES_BOOST\x10\x02\x12\x10\n\x0cWEAPON_BOOST\x10\x03\x12\x12\n\x0eTRIPLED_ON_HIT\x10\x04\x12\x12\n\x0eSTACKING_BONUS\x10\x05\x12\x08\n\x04NONE\x10\x06\x42=\n\x1emech.mania.engine.domain.modelB\nItemProtos\xaa\x02\x0eMM26.IO.Modelsb\x06proto3')
+  serialized_pb=_b('\n\nitem.proto\x12\x04item\"\xd6\x01\n\x04Item\x12 \n\x07\x63lothes\x18\x03 \x01(\x0b\x32\r.item.ClothesH\x00\x12\x18\n\x03hat\x18\x04 \x01(\x0b\x32\t.item.HatH\x00\x12\x1c\n\x05shoes\x18\x05 \x01(\x0b\x32\x0b.item.ShoesH\x00\x12\x1e\n\x06weapon\x18\x06 \x01(\x0b\x32\x0c.item.WeaponH\x00\x12&\n\nconsumable\x18\x07 \x01(\x0b\x32\x10.item.ConsumableH\x00\x12$\n\taccessory\x18\x08 \x01(\x0b\x32\x0f.item.AccessoryH\x00\x42\x06\n\x04item\"Q\n\x07\x43lothes\x12\x11\n\tmax_stack\x18\x01 \x01(\x05\x12#\n\x05stats\x18\x02 \x01(\x0b\x32\x14.item.StatusModifier\x12\x0e\n\x06sprite\x18\x03 \x01(\t\"v\n\x03Hat\x12\x11\n\tmax_stack\x18\x01 \x01(\x05\x12#\n\x05stats\x18\x02 \x01(\x0b\x32\x14.item.StatusModifier\x12\'\n\x0cmagic_effect\x18\x03 \x01(\x0e\x32\x11.item.MagicEffect\x12\x0e\n\x06sprite\x18\x04 \x01(\t\"|\n\tAccessory\x12\x11\n\tmax_stack\x18\x01 \x01(\x05\x12#\n\x05stats\x18\x02 \x01(\x0b\x32\x14.item.StatusModifier\x12\'\n\x0cmagic_effect\x18\x03 \x01(\x0e\x32\x11.item.MagicEffect\x12\x0e\n\x06sprite\x18\x04 \x01(\t\"O\n\x05Shoes\x12\x11\n\tmax_stack\x18\x01 \x01(\x05\x12#\n\x05stats\x18\x02 \x01(\x0b\x32\x14.item.StatusModifier\x12\x0e\n\x06sprite\x18\x03 \x01(\t\"\xb7\x01\n\x06Weapon\x12\x11\n\tmax_stack\x18\x01 \x01(\x05\x12#\n\x05stats\x18\x02 \x01(\x0b\x32\x14.item.StatusModifier\x12\r\n\x05range\x18\x03 \x01(\x05\x12\x15\n\rsplash_radius\x18\x04 \x01(\x05\x12\x0e\n\x06\x61ttack\x18\x05 \x01(\x05\x12/\n\ron_hit_effect\x18\x06 \x01(\x0b\x32\x18.item.TempStatusModifier\x12\x0e\n\x06sprite\x18\x07 \x01(\t\"i\n\nConsumable\x12\x11\n\tmax_stack\x18\x01 \x01(\x05\x12(\n\x06\x65\x66\x66\x65\x63t\x18\x02 \x01(\x0b\x32\x18.item.TempStatusModifier\x12\x0e\n\x06stacks\x18\x03 \x01(\x05\x12\x0e\n\x06sprite\x18\x04 \x01(\t\"\xdc\x02\n\x0eStatusModifier\x12\x19\n\x11\x66lat_speed_change\x18\x01 \x01(\x05\x12\x1c\n\x14percent_speed_change\x18\x02 \x01(\x01\x12\x1a\n\x12\x66lat_health_change\x18\x03 \x01(\x05\x12\x1d\n\x15percent_health_change\x18\x04 \x01(\x01\x12\x1e\n\x16\x66lat_experience_change\x18\x05 \x01(\x05\x12!\n\x19percent_experience_change\x18\x06 \x01(\x01\x12\x1a\n\x12\x66lat_attack_change\x18\x07 \x01(\x05\x12\x1d\n\x15percent_attack_change\x18\x08 \x01(\x01\x12\x1b\n\x13\x66lat_defense_change\x18\t \x01(\x05\x12\x1e\n\x16percent_defense_change\x18\n \x01(\x01\x12\x1b\n\x13\x66lat_regen_per_turn\x18\x0b \x01(\x05\"\xa9\x01\n\x12TempStatusModifier\x12#\n\x05stats\x18\x01 \x01(\x0b\x32\x14.item.StatusModifier\x12\x1c\n\x14\x66lat_damage_per_turn\x18\x02 \x01(\x05\x12\x1f\n\x17percent_damage_per_turn\x18\x03 \x01(\x01\x12\x1b\n\x13\x66lat_regen_per_turn\x18\x04 \x01(\x05\x12\x12\n\nturns_left\x18\x05 \x01(\x05*\x8c\x01\n\x0bMagicEffect\x12\x15\n\x11LINGERING_POTIONS\x10\x00\x12\x0f\n\x0bSHOES_BOOST\x10\x01\x12\x11\n\rCLOTHES_BOOST\x10\x02\x12\x10\n\x0cWEAPON_BOOST\x10\x03\x12\x12\n\x0eTRIPLED_ON_HIT\x10\x04\x12\x12\n\x0eSTACKING_BONUS\x10\x05\x12\x08\n\x04NONE\x10\x06\x42=\n\x1emech.mania.engine.domain.modelB\nItemProtos\xaa\x02\x0eMM26.IO.Modelsb\x06proto3')
 )
 
 _MAGICEFFECT = _descriptor.EnumDescriptor(
@@ -61,8 +61,8 @@ _MAGICEFFECT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1448,
-  serialized_end=1588,
+  serialized_start=1464,
+  serialized_end=1604,
 )
 _sym_db.RegisterEnumDescriptor(_MAGICEFFECT)
 
@@ -271,6 +271,13 @@ _ACCESSORY = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='sprite', full_name='item.Accessory.sprite', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -284,7 +291,7 @@ _ACCESSORY = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=440,
-  serialized_end=548,
+  serialized_end=564,
 )
 
 
@@ -328,8 +335,8 @@ _SHOES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=550,
-  serialized_end=629,
+  serialized_start=566,
+  serialized_end=645,
 )
 
 
@@ -401,8 +408,8 @@ _WEAPON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=632,
-  serialized_end=815,
+  serialized_start=648,
+  serialized_end=831,
 )
 
 
@@ -453,8 +460,8 @@ _CONSUMABLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=817,
-  serialized_end=922,
+  serialized_start=833,
+  serialized_end=938,
 )
 
 
@@ -554,8 +561,8 @@ _STATUSMODIFIER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=925,
-  serialized_end=1273,
+  serialized_start=941,
+  serialized_end=1289,
 )
 
 
@@ -613,8 +620,8 @@ _TEMPSTATUSMODIFIER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1276,
-  serialized_end=1445,
+  serialized_start=1292,
+  serialized_end=1461,
 )
 
 _ITEM.fields_by_name['clothes'].message_type = _CLOTHES
