@@ -250,7 +250,7 @@ class API:
         else:
             return None
 
-    def getLeaderboard(self):
+    def get_leaderboard(self):
         """
         @return The list of current players sorted by total XP
         """
