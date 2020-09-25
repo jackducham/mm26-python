@@ -5,7 +5,7 @@ class StatusModifier:
     def __init__(self, **kwargs):
         if 'kwargs' in kwargs.keys():
             kwargs = kwargs['kwargs']
-        if 'status_modifer_proto' in kwargs.keys():
+        if 'status_modifier_proto' in kwargs.keys():
             status_modifier_proto = kwargs['status_modifier_proto']
             if not isinstance(status_modifier_proto, item_pb2.StatusModifier):
                 raise ValueError(
