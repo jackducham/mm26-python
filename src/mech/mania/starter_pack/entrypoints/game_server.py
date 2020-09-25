@@ -1,6 +1,7 @@
 import sys
 import time
 import traceback
+import logging
 
 from flask import Flask, request
 
@@ -13,6 +14,9 @@ from mech.mania.engine.domain.model import player_pb2
 
 class GameServer:
     def __init__(self, url, port, testing_objects=None):
+        log = logging.getLogger('werkzeug')
+        log.setLevel(logging.ERROR)
+
         self.url = url
         self.port = port
         self.debug = False
@@ -31,7 +35,7 @@ class GameServer:
             player_turn = player_pb2.PlayerTurn()
             player_turn.ParseFromString(payload)
 
-            print(f"Received playerTurn {player_turn.player_name}")
+            print(f"Received playerTurn for player: {player_turn.player_name}, turn: {player_turn.game_state.state_id}")
 
             game_state = GameState(player_turn.game_state)
             player_name = player_turn.player_name
