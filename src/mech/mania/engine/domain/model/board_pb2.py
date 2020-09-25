@@ -6,13 +6,14 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
-from . import item_pb2 as item__pb2
-from . import character_pb2 as character__pb2
+
+import item_pb2 as item__pb2
+import character_pb2 as character__pb2
+
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='board.proto',
@@ -20,9 +21,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\036mech.mania.engine.domain.modelB\013BoardProtos\252\002\016MM26.IO.Models',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0b\x62oard.proto\x12\x05\x62oard\x1a\nitem.proto\x1a\x0f\x63haracter.proto\"g\n\x05\x42oard\x12\x0c\n\x04rows\x18\x01 \x01(\x05\x12\x0f\n\x07\x63olumns\x18\x02 \x01(\x05\x12\x19\n\x04grid\x18\x03 \x03(\x0b\x32\x0b.board.Tile\x12$\n\x07portals\x18\x04 \x03(\x0b\x32\x13.character.Position\"\xb4\x01\n\x04Tile\x12\'\n\ttile_type\x18\x01 \x01(\x0e\x32\x14.board.Tile.TileType\x12\x19\n\x05items\x18\x02 \x03(\x0b\x32\n.item.Item\x12\x15\n\rground_sprite\x18\x03 \x01(\t\x12\x14\n\x0c\x61\x62ove_sprite\x18\x04 \x01(\t\";\n\x08TileType\x12\x08\n\x04VOID\x10\x00\x12\t\n\x05\x42LANK\x10\x01\x12\x0e\n\nIMPASSIBLE\x10\x02\x12\n\n\x06PORTAL\x10\x03\x42>\n\x1emech.mania.engine.domain.modelB\x0b\x42oardProtos\xaa\x02\x0eMM26.IO.Modelsb\x06proto3'
+  serialized_pb=b'\n\x0b\x62oard.proto\x12\x05\x62oard\x1a\nitem.proto\x1a\x0f\x63haracter.proto\"g\n\x05\x42oard\x12\r\n\x05width\x18\x01 \x01(\x05\x12\x0e\n\x06height\x18\x02 \x01(\x05\x12\x19\n\x04grid\x18\x03 \x03(\x0b\x32\x0b.board.Tile\x12$\n\x07portals\x18\x04 \x03(\x0b\x32\x13.character.Position\"\xb4\x01\n\x04Tile\x12\'\n\ttile_type\x18\x01 \x01(\x0e\x32\x14.board.Tile.TileType\x12\x19\n\x05items\x18\x02 \x03(\x0b\x32\n.item.Item\x12\x15\n\rground_sprite\x18\x03 \x01(\t\x12\x14\n\x0c\x61\x62ove_sprite\x18\x04 \x01(\t\";\n\x08TileType\x12\x08\n\x04VOID\x10\x00\x12\t\n\x05\x42LANK\x10\x01\x12\x0e\n\nIMPASSIBLE\x10\x02\x12\n\n\x06PORTAL\x10\x03\x42>\n\x1emech.mania.engine.domain.modelB\x0b\x42oardProtos\xaa\x02\x0eMM26.IO.Modelsb\x06proto3'
   ,
-  dependencies=[item__pb2.DESCRIPTOR, character__pb2.DESCRIPTOR, ])
+  dependencies=[item__pb2.DESCRIPTOR,character__pb2.DESCRIPTOR,])
 
 
 
@@ -71,33 +72,33 @@ _BOARD = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='rows', full_name='board.Board.rows', index=0,
+      name='width', full_name='board.Board.width', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR, create_key=_descriptor._internal_create_key),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='columns', full_name='board.Board.columns', index=1,
+      name='height', full_name='board.Board.height', index=1,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR, create_key=_descriptor._internal_create_key),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='grid', full_name='board.Board.grid', index=2,
       number=3, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR, create_key=_descriptor._internal_create_key),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='portals', full_name='board.Board.portals', index=3,
       number=4, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR, create_key=_descriptor._internal_create_key),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -129,28 +130,28 @@ _TILE = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR, create_key=_descriptor._internal_create_key),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='items', full_name='board.Tile.items', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR, create_key=_descriptor._internal_create_key),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='ground_sprite', full_name='board.Tile.ground_sprite', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR, create_key=_descriptor._internal_create_key),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='above_sprite', full_name='board.Tile.above_sprite', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR, create_key=_descriptor._internal_create_key),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],

@@ -10,7 +10,8 @@ from google.protobuf import symbol_database as _symbol_database
 
 _sym_db = _symbol_database.Default()
 
-from . import game_pb2 as game__pb2
+
+import game_pb2 as game__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -21,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   create_key=_descriptor._internal_create_key,
   serialized_pb=b'\n\x0cplayer.proto\x12\x14player_communication\x1a\ngame.proto\"F\n\nPlayerTurn\x12#\n\ngame_state\x18\x01 \x01(\x0b\x32\x0f.game.GameState\x12\x13\n\x0bplayer_name\x18\x02 \x01(\tB?\n\x1emech.mania.engine.domain.modelB\x0cPlayerProtos\xaa\x02\x0eMM26.IO.Modelsb\x06proto3'
   ,
-  dependencies=[game__pb2.DESCRIPTOR, ])
+  dependencies=[game__pb2.DESCRIPTOR,])
 
 
 
@@ -40,14 +41,14 @@ _PLAYERTURN = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR, create_key=_descriptor._internal_create_key),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='player_name', full_name='player_communication.PlayerTurn.player_name', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR, create_key=_descriptor._internal_create_key),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
