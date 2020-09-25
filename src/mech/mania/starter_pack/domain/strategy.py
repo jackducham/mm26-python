@@ -14,6 +14,7 @@ class Strategy:
         game_state (GameState): The current game state
         """
         api = API(game_state, player_name)
+        my_player = game_state.get_all_players()[player_name]
         # TODO: Implement your strategy here!
 
         decision = CharacterDecision(
