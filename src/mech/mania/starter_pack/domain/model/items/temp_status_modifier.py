@@ -11,17 +11,7 @@ class TempStatusModifier(StatusModifier):
                         temp_status_modifier_proto
                     )))
         super().__init__(
-            kwargs={'flat_speed_change': temp_status_modifier_proto.flat_speed_change,
-                    'percent_speed_change': temp_status_modifier_proto.percent_speed_change,
-                    'flat_health_change': temp_status_modifier_proto.flat_health_change,
-                    'percent_health_change': temp_status_modifier_proto.percent_health_change,
-                    'flat_experience_change': temp_status_modifier_proto.flat_experience_change,
-                    'percent_experience_change': temp_status_modifier_proto.percent_experience_change,
-                    'flat_attack_change': temp_status_modifier_proto.flat_attack_change,
-                    'percent_attack_change': temp_status_modifier_proto.percent_attack_change,
-                    'flat_defense_change': temp_status_modifier_proto.flat_defense_change,
-                    'percent_defense_change': temp_status_modifier_proto.percent_defense_change,
-                    'flat_regen_per_turn': temp_status_modifier_proto.flat_regen_per_turn}
+            kwargs={'status_modifier_proto': temp_status_modifier_proto.stats}
         )
 
         self.turns_left = temp_status_modifier_proto.turns_left

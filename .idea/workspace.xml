@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c428c25-f03a-482d-8d09-d9662f146c2d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/mech/mania/starter_pack/domain/model/items/status_modifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/mech/mania/starter_pack/domain/model/items/status_modifier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mech/mania/starter_pack/domain/model/items/temp_status_modifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/mech/mania/starter_pack/domain/model/items/temp_status_modifier.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +81,7 @@
       <workItem from="1600974731435" duration="1531000" />
       <workItem from="1600978706253" duration="1439000" />
       <workItem from="1600989052172" duration="120000" />
-      <workItem from="1600994504066" duration="2351000" />
+      <workItem from="1600994504066" duration="2672000" />
     </task>
     <servers />
   </component>
