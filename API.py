@@ -5,6 +5,14 @@ from protos import character_pb2
 from protos import game_pb2
 API_SERVER_URL = "http://127.0.0.1:8082/api/"
 
+"""
+Finds a path from start to end in the current game state.
+
+@param start: The position to start from
+@param end: The position to end at
+@return A list of Position objects from start to end or an empty list if no path is possible.
+*/
+"""
 def pathFinding(gameState, start, end):
     if isinstance(gameState, game_pb2.GameState) and isinstance(start, character_pb2.Position) and isinstance(end, character_pb2.Position):
         url = API_SERVER_URL + "pathFinding"
@@ -22,7 +30,12 @@ def pathFinding(gameState, start, end):
         return APIresponse.path
     else:
         return None
+"""
+Finds all enemies around a given position and sorts them by distance
 
+@param position: The center position to search around
+@return A List of Characters sorted by distance from the given position
+"""
 def findEnemiesByDistance(gameState, position, player_name):
     if isinstance(gameState, game_pb2.GameState) and isinstance(position, character_pb2.Position) and isinstance(player_name, str):
         url = API_SERVER_URL + "findEnemiesByDistance"
@@ -41,6 +54,12 @@ def findEnemiesByDistance(gameState, position, player_name):
     else:
         return None
 
+"""
+Returns a list of nearby monsters sorted by their total XP
+
+@param position: The center position to search around
+@return A List of Monster objects sorted by XP
+"""
 def findMonstersByExp(gameState, position):
     if isinstance(gameState, game_pb2.GameState) and isinstance(position, character_pb2.Position):
         url = API_SERVER_URL + "findMonstersByExp"
@@ -58,6 +77,13 @@ def findMonstersByExp(gameState, position):
     else:
         return None
 
+"""
+Finds all items within a given range of the given position
+
+@param position: The position around which to search
+@param range: The range to search within
+@return A List of Items found in the search
+"""
 def findItemsInRangeByDistance(gameState, position, player_name, range):
     if isinstance(gameState, game_pb2.GameState) and isinstance(position, character_pb2.Position) and isinstance(player_name, str) and isinstance(range, int):
         url = API_SERVER_URL + "findItemsInRangeByDistance"
@@ -76,6 +102,12 @@ def findItemsInRangeByDistance(gameState, position, player_name, range):
     else:
         return None
 
+"""
+Finds a list of enemies that would be in range of an attack from your current weapon if you were at the given position
+
+@param position: The position to assume you are at
+@return A List of Characters sorted by distance.
+"""
 def findEnemiesInRangeOfAttackByDistance(gameState, position, player_name):
     if isinstance(gameState, game_pb2.GameState) and isinstance(position, character_pb2.Position) and isinstance(player_name, str):
         url = API_SERVER_URL + "findEnemiesInRangeOfAttackByDistance"
@@ -93,6 +125,13 @@ def findEnemiesInRangeOfAttackByDistance(gameState, position, player_name):
     else:
         return None
 
+"""
+Finds all enemies that would be hit by your attack if you chose the given position
+as your actionPosition in an ATTACK decision this turn.
+
+@param position: The position to test your attack at
+@return A List of Characters who would be hit by your attack
+"""
 def findAllEnemiesHit(gameState, position, player_name):
     if isinstance(gameState, game_pb2.GameState) and isinstance(position, character_pb2.Position) and isinstance(player_name, str):
         url = API_SERVER_URL + "findAllEnemiesHit"
@@ -110,6 +149,12 @@ def findAllEnemiesHit(gameState, position, player_name):
     else:
         return None
 
+"""
+Determines if the given position is in the attack range of any enemy
+
+@param position: the position to test the safety of
+@return True if any enemy can attack in one turn, False otherwise
+"""
 def inRangeOfAttack(gameState, position, player_name):
     if isinstance(gameState, game_pb2.GameState) and isinstance(position, character_pb2.Position) and isinstance(player_name, str):
         url = API_SERVER_URL + "inRangeOfAttack"
@@ -126,7 +171,12 @@ def inRangeOfAttack(gameState, position, player_name):
         return APIresponse.inRangeOfAttack
     else:
         return None
+"""
+Finds the closest portal to the given position
 
+@param position: The position to begin searching from
+@return A Position representing the location of the closest portal, or null if an error occurred.
+"""
 def findClosestPortal(gameState, position):
     if isinstance(gameState, game_pb2.GameState) and isinstance(position, character_pb2.Position):
         url = API_SERVER_URL + "findClosestPortal"
@@ -143,6 +193,9 @@ def findClosestPortal(gameState, position):
     else:
         return None
 
+"""
+@return The list of current players sorted by total XP
+"""
 def leaderBoard(gameState):
     if isinstance(gameState, game_pb2.GameState):
         url = API_SERVER_URL + "leaderBoard"
