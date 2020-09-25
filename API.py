@@ -30,6 +30,7 @@ def pathFinding(gameState, start, end):
         return APIresponse.path
     else:
         return None
+
 """
 Finds all enemies around a given position and sorts them by distance
 
@@ -171,6 +172,7 @@ def inRangeOfAttack(gameState, position, player_name):
         return APIresponse.inRangeOfAttack
     else:
         return None
+
 """
 Finds the closest portal to the given position
 
