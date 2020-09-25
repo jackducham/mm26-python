@@ -11,7 +11,7 @@ class GameState:
                 type(game_state_proto)))
 
         self.board_names = {}
-        for k, v in game_state_proto.board_names:
+        for k, v in game_state_proto.board_names.items():
             self.board_names[k] = Board(v)
 
         self.turn_number = game_state_proto.turn_number
@@ -19,10 +19,10 @@ class GameState:
         self.player_names = {}
         self.monster_names = {}
 
-        for k, v in game_state_proto.monster_names:
+        for k, v in game_state_proto.monster_names.items():
             self.monster_names[k] = Monster(v)
 
-        for k, v in game_state_proto.player_names:
+        for k, v in game_state_proto.player_names.items():
             self.player_names[k] = Player(v)
 
     def get_pvp_board(self):
