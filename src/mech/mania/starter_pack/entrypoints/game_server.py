@@ -42,7 +42,7 @@ class GameServer:
                 decision = self.strategy.make_decision(player_name, game_state)
             except Exception as err:
                 print("Exception making decision:")
-                traceback.print_tb(err.__traceback__)
+                traceback.print_exc()
                 decision = None
 
             if decision is not None:

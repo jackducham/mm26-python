@@ -72,7 +72,7 @@ class GameState:
 
     def build_proto_class(self):
         game_state_builder = game_pb2.GameState()
-        game_state_builder.state_id = self.state_id
+        game_state_builder.state_id = self.turn_num
         game_state_builder.board_names = self.board_names
         game_state_builder.player_names = self.player_names
         game_state_builder.monster_names = self.monster_names
