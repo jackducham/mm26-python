@@ -70,16 +70,6 @@ class GameState:
 
         return [monster for monster in self.monster_names.values() if monster.position.board_id == board_id]
 
-    def build_proto_class(self):
-        game_state_builder = game_pb2.GameState()
-        game_state_builder.state_id = self.turn_num
-        for name, board in self.board_names.items():
-            game_state_builder.board_names[name].CopyFrom(self.board_names[name].build_proto_class())
-        for name, player in self.player_names.items():
-            game_state_builder.player_names[name].CopyFrom(self.player_names[name].build_proto_class())
-        for name, monster in self.monster_names.items():
-            game_state_builder.monster_names[name].CopyFrom(self.monster_names[name].build_proto_class())
-
         # for name, board in self.board_names.items():
         #     game_state_builder.board_names[name].width = board.width
         #     game_state_builder.board_names[name].height = board.height

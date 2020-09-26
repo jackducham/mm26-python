@@ -29,6 +29,6 @@ class CharacterDecision:
 
         decision_builder.index = self.action_index
         if self.action_position is not None:
-            decision_builder.target_position = self.action_position.build_proto_class()
+            decision_builder.target_position.CopyFrom(self.action_position.build_proto_class())
 
         return decision_builder

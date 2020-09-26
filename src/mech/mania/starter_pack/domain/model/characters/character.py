@@ -7,6 +7,8 @@ from mech.mania.starter_pack.domain.model.items.weapon import Weapon
 class Character:
     def __init__(self, character_proto: character_pb2.Character):
 
+        self.character_proto = character_proto
+
         self.name = character_proto.name
 
         self.base_speed = character_proto.base_speed
@@ -117,3 +119,6 @@ class Character:
 
     def get_weapon(self):
         return self.weapon
+
+    def build_proto_class(self):
+        return self.character_proto
