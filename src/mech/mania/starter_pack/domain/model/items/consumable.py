@@ -8,6 +8,7 @@ class Consumable(Item):
         super().__init__(max_stack)
         self.effect = TempStatusModifier(consumable_proto.effect)
         self.stacks = consumable_proto.stacks
+        self.turns_to_deletion = consumable_proto.turns_to_deletion
 
     def get_stacks(self):
         return self.stacks
