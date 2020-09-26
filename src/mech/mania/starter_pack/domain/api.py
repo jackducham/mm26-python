@@ -19,7 +19,7 @@ class API:
     def __init__(self, game_state, player_name):
         self.game_state = game_state.build_proto_class()
         self.player_name = player_name
-        self.API_SERVER_URL = "http://engine-main.mechmania.io:8082/api/"
+        self.API_SERVER_URL = "http://engine-test.mechmania.io:8082/api/"
 
     def find_path(self, start, end):
         """
@@ -28,6 +28,7 @@ class API:
         @param start: The position to start from
         @param end: The position to end at
         @return A list of Position objects from start to end or an empty list if no path is possible.
+        */
         """
         if isinstance(start, position.Position) and isinstance(end, position.Position):
             url = self.API_SERVER_URL + "pathFinding"
@@ -36,7 +37,7 @@ class API:
             payload.start.CopyFrom(start.build_proto_class())
             payload.end.CopyFrom(end.build_proto_class())
 
-            response = requests.post(url, headers={'Content-Type': 'application/octet-stream'},
+            response = requests.post(url, headers={'Content-Type': 'application/protobuf'},
                                      data=payload.SerializeToString())
             APIresponse = api_pb2.APIPathFindingResponse()
             APIresponse.ParseFromString(response.content)
@@ -65,7 +66,7 @@ class API:
             payload.position.CopyFrom(pos.build_proto_class())
             payload.player_name = self.player_name
 
-            response = requests.post(url, headers={'Content-Type': 'application/octet-stream'}, data=payload.SerializeToString())
+            response = requests.post(url, headers={'Content-Type': 'application/protobuf'}, data=payload.SerializeToString())
 
             APIresponse = api_pb2.APIFindEnemiesByDistanceResponse()
             APIresponse.ParseFromString(response.content)
@@ -79,7 +80,7 @@ class API:
         else:
             return None
 
-    def find_monsters_by_exp(self, pos):
+    def findMonstersByExp(self, pos):
         """
         Returns a list of nearby monsters sorted by their total XP
 
@@ -92,7 +93,7 @@ class API:
             payload.gameState.CopyFrom(self.game_state)
             payload.position.CopyFrom(pos.build_proto_class())
 
-            response = requests.post(url, headers={'Content-Type': 'application/octet-stream'}, data=payload.SerializeToString())
+            response = requests.post(url, headers={'Content-Type': 'application/protobuf'}, data=payload.SerializeToString())
 
             APIresponse = api_pb2.APIFindMonstersByExpResponse()
             APIresponse.ParseFromString(response.content)
@@ -122,7 +123,7 @@ class API:
             payload.player_name = self.player_name
             payload.range = range
 
-            response = requests.post(url, headers={'Content-Type': 'application/octet-stream'}, data=payload.SerializeToString())
+            response = requests.post(url, headers={'Content-Type': 'application/protobuf'}, data=payload.SerializeToString())
             APIresponse = api_pb2.APIFindItemsInRangeByDistanceResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
@@ -165,7 +166,7 @@ class API:
             payload.position.CopyFrom(pos.build_proto_class())
             payload.player_name = self.player_name
 
-            response = requests.post(url, headers={'Content-Type': 'application/octet-stream'}, data=payload.SerializeToString())
+            response = requests.post(url, headers={'Content-Type': 'application/protobuf'}, data=payload.SerializeToString())
             APIresponse = api_pb2.APIFindEnemiesInRangeOfAttackByDistanceResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
@@ -192,7 +193,7 @@ class API:
             payload.position.CopyFrom(pos.build_proto_class())
             payload.player_name = self.player_name
 
-            response = requests.post(url, headers={'Content-Type': 'application/octet-stream'}, data=payload.SerializeToString())
+            response = requests.post(url, headers={'Content-Type': 'application/protobuf'}, data=payload.SerializeToString())
             APIresponse = api_pb2.APIFindAllEnemiesHitResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
@@ -218,7 +219,7 @@ class API:
             payload.position.CopyFrom(pos.build_proto_class())
             payload.player_name = self.player_name
 
-            response = requests.post(url, headers={'Content-Type': 'application/octet-stream'}, data=payload.SerializeToString())
+            response = requests.post(url, headers={'Content-Type': 'application/protobuf'}, data=payload.SerializeToString())
             APIresponse = api_pb2.APIInRangeOfAttackResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
@@ -240,7 +241,7 @@ class API:
             payload.gameState.CopyFrom(self.game_state)
             payload.position.CopyFrom(pos.build_proto_class())
 
-            response = requests.post(url, headers={'Content-Type': 'application/octet-stream'}, data=payload.SerializeToString())
+            response = requests.post(url, headers={'Content-Type': 'application/protobuf'}, data=payload.SerializeToString())
             APIresponse = api_pb2.APIFindClosestPortalResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
@@ -257,7 +258,7 @@ class API:
         payload = api_pb2.APILeaderBoardRequest()
         payload.gameState.CopyFrom(self.game_state)
 
-        response = requests.post(url, headers={'Content-Type': 'application/octet-stream'}, data=payload.SerializeToString())
+        response = requests.post(url, headers={'Content-Type': 'application/protobuf'}, data=payload.SerializeToString())
         APIresponse = api_pb2.APILeaderBoardResponse()
         APIresponse.ParseFromString(response.content)
         if APIresponse.status.status != 200:
