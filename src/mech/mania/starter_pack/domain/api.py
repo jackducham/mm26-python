@@ -42,7 +42,7 @@ class API:
             APIresponse.ParseFromString(response.content)
 
             if APIresponse.status.status != 200:
-                return APIresponse.status
+                return None
 
             path = []
             for tile in APIresponse.path:
@@ -70,7 +70,7 @@ class API:
             APIresponse = api_pb2.APIFindEnemiesByDistanceResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
-                return APIresponse.status
+                return None
 
             enemies = []
             for enemy in APIresponse.enemies:
@@ -97,7 +97,7 @@ class API:
             APIresponse = api_pb2.APIFindMonstersByExpResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
-                return APIresponse.status
+                return None
 
             monsters = []
             for m in APIresponse.monsters:
@@ -126,7 +126,7 @@ class API:
             APIresponse = api_pb2.APIFindItemsInRangeByDistanceResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
-                return APIresponse.status
+                return None
 
             items = []
             item_positions = []
@@ -169,7 +169,7 @@ class API:
             APIresponse = api_pb2.APIFindEnemiesInRangeOfAttackByDistanceResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
-                return APIresponse.status
+                return None
             enemies = []
             for enemy in APIresponse.enemies:
                 enemies.append(character.Character(enemy))
@@ -196,7 +196,7 @@ class API:
             APIresponse = api_pb2.APIFindAllEnemiesHitResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
-                return APIresponse.status
+                return None
             enemies = []
             for enemy in APIresponse.enemies_hit:
                 enemies.append(character.Character(enemy))
@@ -222,7 +222,7 @@ class API:
             APIresponse = api_pb2.APIInRangeOfAttackResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
-                return APIresponse.status
+                return None
             return APIresponse.inRangeOfAttack
         else:
             return None
@@ -244,7 +244,7 @@ class API:
             APIresponse = api_pb2.APIFindClosestPortalResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
-                return APIresponse.status
+                return None
             return position.Position(APIresponse.portal)
         else:
             return None
@@ -261,7 +261,7 @@ class API:
         APIresponse = api_pb2.APILeaderBoardResponse()
         APIresponse.ParseFromString(response.content)
         if APIresponse.status.status != 200:
-            return APIresponse.status
+            return None
 
         leaderBoard = []
         for p in APIresponse.leaderBoard:
