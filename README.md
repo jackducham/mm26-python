@@ -14,4 +14,4 @@ Welcome to MechMania 26! This is the **Python Starter Pack**. In this repository
 - **Do** use the objects defined in the `engine` folder to help you.
 
 ## Questions
-If you have any questions about the classes and functions given to you here, please ask the MechMania staff on our Discord. Good luck!
+If you have any questions about the classes and functions given to you here, please check out the [game wiki](https://github.com/jackducham/mm26-design/wiki) or ask the MechMania staff on our Discord. Good luck!
