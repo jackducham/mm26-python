@@ -11,6 +11,7 @@ class Strategy:
         self.memory = memory
         self.logger = logging.getLogger('strategy')
         self.logger.setLevel(logging.DEBUG)
+        logging.basicConfig(level = logging.INFO)
 
     def make_decision(self, player_name: str, game_state: GameState) -> CharacterDecision:
         """
