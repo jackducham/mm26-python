@@ -28,9 +28,26 @@ class Strategy:
         self.logger.info("In make_decision")
 
         self.logger.info(f"Currently at position: ({self.curr_pos.x},{self.curr_pos.y}) on board '{self.curr_pos.board_id}'")
+        self.logger.info("Player Stats:")
+        self.logger.info(f"{self.my_player.get_name() = }")
+        self.logger.info(f"{self.my_player.get_speed() = }")
+        self.logger.info(f"{self.my_player.get_current_health() = }")
+        self.logger.info(f"{self.my_player.get_experience() = }")
+        self.logger.info(f"{self.my_player.get_attack() = }")
+        self.logger.info(f"{self.my_player.get_defense() = }")
+        self.logger.info(f"{self.my_player.get_level() = }")
+        self.logger.info(f"{self.my_player.get_weapon().get_attack() = }")
 
         last_action, type = self.memory.get_value("last_action", str)
         self.logger.info(f"last_action: '{last_action}'")
+
+        # return CharacterDecision(
+        #     decision_type="MOVE",
+        #     action_position=Position.create(self.curr_pos.x + 1,
+        #                                     self.curr_pos.y,
+        #                                     self.curr_pos.board_id),
+        #     action_index=None
+        # )
 
         if last_action is not None and last_action == "PICKUP":
             self.logger.info("Last action was picking up, equipping picked up object")
@@ -53,6 +70,7 @@ class Strategy:
 
         weapon = self.my_player.get_weapon()
         enemies = self.api.find_enemies_by_distance(self.curr_pos)
+        if enemies.
         if enemies is None or len(enemies) == 0:
             self.logger.info("There is no enemies in range, moving to spawn point")
             self.memory.set_value("last_action", "MOVE")
@@ -62,12 +80,13 @@ class Strategy:
                 action_index=None
             )
 
+        self.logger.info(f"Closest enemy health: {enemies[0].get_current_health()}")
         enemy_pos = enemies[0].get_position()
         if self.curr_pos.manhattan_distance(enemy_pos) <= weapon.get_range():
             self.logger.info("There is an enemy within weapon range, attacking")
             self.memory.set_value("last_action", "ATTACK")
             return CharacterDecision(
-                decision_type="ATTACK",
+                decision_type="NONE",
                 action_position=enemy_pos,
                 action_index=None
             )

@@ -3,16 +3,16 @@ from mech.mania.engine.domain.model import api_pb2
 from mech.mania.engine.domain.model import character_pb2
 from mech.mania.engine.domain.model import game_pb2
 from mech.mania.engine.domain.model import item_pb2
-from mech.mania.starter_pack.domain.model.characters import position
-from mech.mania.starter_pack.domain.model.characters import character
-from mech.mania.starter_pack.domain.model.characters import player
-from mech.mania.starter_pack.domain.model.characters import monster
-from mech.mania.starter_pack.domain.model.items import accessory
-from mech.mania.starter_pack.domain.model.items import clothes
-from mech.mania.starter_pack.domain.model.items import consumable
-from mech.mania.starter_pack.domain.model.items import hat
-from mech.mania.starter_pack.domain.model.items import shoes
-from mech.mania.starter_pack.domain.model.items import weapon
+from mech.mania.starter_pack.domain.model.characters.position import Position
+from mech.mania.starter_pack.domain.model.characters.character import Character
+from mech.mania.starter_pack.domain.model.characters.player import Player
+from mech.mania.starter_pack.domain.model.characters.monster import Monster
+from mech.mania.starter_pack.domain.model.items.accessory import Accessory
+from mech.mania.starter_pack.domain.model.items.clothes import Clothes
+from mech.mania.starter_pack.domain.model.items.consumable import Consumable
+from mech.mania.starter_pack.domain.model.items.hat import Hat
+from mech.mania.starter_pack.domain.model.items.shoes import Shoes
+from mech.mania.starter_pack.domain.model.items.weapon import Weapon
 
 
 class API:
@@ -21,7 +21,7 @@ class API:
         self.player_name = player_name
         self.API_SERVER_URL = "http://engine-main.mechmania.io:8082/api/"
 
-    def find_path(self, start, end):
+    def find_path(self, start: Position, end: Position) -> tuple[list[Position], api_pb2.APIStatus]:
         """
         Finds a path from start to end in the current game state.
 
@@ -29,7 +29,7 @@ class API:
         @param end: The position to end at
         @return A list of Position objects from start to end or an empty list if no path is possible.
         """
-        if isinstance(start, position.Position) and isinstance(end, position.Position):
+        if isinstance(start, Position) and isinstance(end, Position):
             url = self.API_SERVER_URL + "pathFinding"
             payload = api_pb2.APIPathFindingRequest()
             payload.gameState.CopyFrom(self.game_state)
@@ -42,23 +42,23 @@ class API:
             APIresponse.ParseFromString(response.content)
 
             if APIresponse.status.status != 200:
-                return APIresponse.status
+                return None, APIresponse.status
 
             path = []
             for tile in APIresponse.path:
-                path.append(position.Position(tile))
-            return path
+                path.append(Position(tile))
+            return path, APIresponse.status
         else:
-            return None
+            return None, None
 
-    def find_enemies_by_distance(self, pos):
+    def find_enemies_by_distance(self, pos: Position) -> tuple[list[Character], api_pb2.APIStatus]:
         """
         Finds all enemies around a given position and sorts them by distance
 
         @param position: The center position to search around
         @return A List of Characters sorted by distance from the given position
         """
-        if isinstance(pos, position.Position):
+        if isinstance(pos, Position):
             url = self.API_SERVER_URL + "findEnemiesByDistance"
             payload = api_pb2.APIFindEnemiesByDistanceRequest()
             payload.gameState.CopyFrom(self.game_state)
@@ -70,23 +70,23 @@ class API:
             APIresponse = api_pb2.APIFindEnemiesByDistanceResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
-                return APIresponse.status
+                return None, APIresponse.status
 
             enemies = []
             for enemy in APIresponse.enemies:
                 enemies.append(character.Character(enemy))
-            return enemies
+            return enemies, APIresponse.status
         else:
-            return None
+            return None, None
 
-    def find_monsters_by_exp(self, pos):
+    def find_monsters_by_exp(self, pos: Position) -> tuple[list[Monster], api_pb2.APIStatus]:
         """
         Returns a list of nearby monsters sorted by their total XP
 
         @param position: The center position to search around
         @return A List of Monster objects sorted by XP
         """
-        if isinstance(pos, position.Position):
+        if isinstance(pos, Position):
             url = self.API_SERVER_URL + "findMonstersByExp"
             payload = api_pb2.APIFindMonstersByExpRequest()
             payload.gameState.CopyFrom(self.game_state)
@@ -97,16 +97,16 @@ class API:
             APIresponse = api_pb2.APIFindMonstersByExpResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
-                return APIresponse.status
+                return None, APIresponse.status
 
             monsters = []
             for m in APIresponse.monsters:
                 monsters.append(monster.Monster(m))
-            return monsters
+            return monsters, APIresponse.status
         else:
-            return None
+            return None, None
 
-    def find_items_in_range_by_distance(self, pos, range):
+    def find_items_in_range_by_distance(self, pos: Position, range: int) -> tuple[tuple[list[Item],list[Position]], api_pb2.APIStatus]:
         """
         Finds all items within a given range of the given position
 
@@ -114,7 +114,7 @@ class API:
         @param range: The range to search within
         @return A List of Items found in the search
         """
-        if isinstance(pos, position.Position) and isinstance(range, int):
+        if isinstance(pos, Position) and isinstance(range, int):
             url = self.API_SERVER_URL + "findItemsInRangeByDistance"
             payload = api_pb2.APIFindItemsInRangeByDistanceRequest()
             payload.gameState.CopyFrom(self.game_state)
@@ -126,39 +126,39 @@ class API:
             APIresponse = api_pb2.APIFindItemsInRangeByDistanceResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
-                return APIresponse.status
+                return None, APIresponse.status
 
             items = []
             item_positions = []
             for i in APIresponse.items:
                 if i.HasField("accessory"):
-                    items.append(accessory.Accessory(i.accessory))
+                    items.append(Accessory(i.accessory))
                 elif i.HasField("clothes"):
-                    items.append(clothes.Clothes(i.clothes))
+                    items.append(Clothes(i.clothes))
                 elif i.HasField("consumable"):
-                    items.append(consumable.Consumable(i.consumable))
+                    items.append(Consumable(i.consumable))
                 elif i.HasField("hat"):
-                    items.append(hat.Hat(i.hat))
+                    items.append(Hat(i.hat))
                 elif i.HasField("shoes"):
-                    items.append(shoes.Shoes(i.shoes))
+                    items.append(Shoes(i.shoes))
                 elif i.HasField("weapon"):
-                    items.append(weapon.Weapon(i.weapon))
+                    items.append(Weapon(i.weapon))
 
             for i_pos in APIresponse.positions:
-                item_positions.append(position.Position(i_pos))
+                item_positions.append(Position(i_pos))
 
-            return (items, item_positions)
+            return (items, item_positions), APIresponse.status
         else:
-            return None
+            return None, None
 
-    def find_enemies_in_range_of_attack_by_distance(self, pos):
+    def find_enemies_in_range_of_attack_by_distance(self, pos: Position) -> tuple[list[Character], api_pb2.APIStatus]:
         """
         Finds a list of enemies that would be in range of an attack from your current weapon if you were at the given position
 
         @param position: The position to assume you are at
         @return A List of Characters sorted by distance.
         """
-        if isinstance(pos, position.Position):
+        if isinstance(pos, Position):
             url = self.API_SERVER_URL + "findEnemiesInRangeOfAttackByDistance"
             payload = api_pb2.APIFindEnemiesInRangeOfAttackByDistanceRequest()
             payload.gameState.CopyFrom(self.game_state)
@@ -169,15 +169,15 @@ class API:
             APIresponse = api_pb2.APIFindEnemiesInRangeOfAttackByDistanceResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
-                return APIresponse.status
+                return None, APIresponse.status
             enemies = []
             for enemy in APIresponse.enemies:
                 enemies.append(character.Character(enemy))
-            return enemies
+            return enemies, APIresponse.status
         else:
-            return None
+            return None, None
 
-    def find_all_enemies_hit(self, pos):
+    def find_all_enemies_hit(self, pos: Position) -> tuple[list[Character], api_pb2.APIStatus]:
         """
         Finds all enemies that would be hit by your attack if you chose the given position
         as your actionPosition in an ATTACK decision this turn.
@@ -185,7 +185,7 @@ class API:
         @param position: The position to test your attack at
         @return A List of Characters who would be hit by your attack
         """
-        if isinstance(pos, position.Position):
+        if isinstance(pos, Position):
             url = self.API_SERVER_URL + "findAllEnemiesHit"
             payload = api_pb2.APIFindAllEnemiesHitRequest()
             payload.gameState.CopyFrom(self.game_state)
@@ -196,22 +196,22 @@ class API:
             APIresponse = api_pb2.APIFindAllEnemiesHitResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
-                return APIresponse.status
+                return None, APIresponse.status
             enemies = []
             for enemy in APIresponse.enemies_hit:
                 enemies.append(character.Character(enemy))
-            return enemies
+            return enemies, APIresponse.status
         else:
-            return None
+            return None, None
 
-    def in_range_of_attack(self, pos):
+    def in_range_of_attack(self, pos: Position) -> tuple[bool, api_pb2.APIStatus]:
         """
         Determines if the given position is in the attack range of any enemy
 
         @param position: the position to test the safety of
         @return True if any enemy can attack in one turn, False otherwise
         """
-        if isinstance(pos, position.Position):
+        if isinstance(pos, Position):
             url = self.API_SERVER_URL + "inRangeOfAttack"
             payload = api_pb2.APIInRangeOfAttackRequest()
             payload.gameState.CopyFrom(self.game_state)
@@ -222,19 +222,19 @@ class API:
             APIresponse = api_pb2.APIInRangeOfAttackResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
-                return APIresponse.status
-            return APIresponse.inRangeOfAttack
+                return None, APIresponse.status
+            return APIresponse.inRangeOfAttack, APIresponse.status
         else:
-            return None
+            return None, None
 
-    def find_closest_portal(self, pos):
+    def find_closest_portal(self, pos: Position) -> tuple[Position, api_pb2.APIStatus]:
         """
         Finds the closest portal to the given position
 
         @param position: The position to begin searching from
         @return A Position representing the location of the closest portal, or null if an error occurred.
         """
-        if isinstance(pos, position.Position):
+        if isinstance(pos, Position):
             url = self.API_SERVER_URL + "findClosestPortal"
             payload = api_pb2.APIFindClosestPortalRequest()
             payload.gameState.CopyFrom(self.game_state)
@@ -244,12 +244,12 @@ class API:
             APIresponse = api_pb2.APIFindClosestPortalResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
-                return APIresponse.status
-            return position.Position(APIresponse.portal)
+                return None, APIresponse.status
+            return Position(APIresponse.portal), APIresponse.status
         else:
-            return None
+            return None, None
 
-    def get_leaderboard(self):
+    def get_leaderboard(self) -> tuple[list[Player], api_pb2.APIStatus]:
         """
         @return The list of current players sorted by total XP
         """
@@ -261,10 +261,11 @@ class API:
         APIresponse = api_pb2.APILeaderBoardResponse()
         APIresponse.ParseFromString(response.content)
         if APIresponse.status.status != 200:
-            return APIresponse.status
+            return None, APIresponse.status
 
         leaderBoard = []
         for p in APIresponse.leaderBoard:
-            leaderBoard.append(player.Player(p))
+            leaderBoard.append(Player(p))
 
-        return leaderBoard
+        return leaderBoard, APIresponse.status
+
