@@ -20,7 +20,8 @@ class Strategy:
         api = API(game_state, player_name)
         my_player = game_state.get_all_players()[player_name]
 
-        logger.info("In make_decision")
+        self.logger.info("In make_decision")
+
 
 
         decision = CharacterDecision(
