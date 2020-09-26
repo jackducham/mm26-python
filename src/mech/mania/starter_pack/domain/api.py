@@ -19,7 +19,7 @@ class API:
     def __init__(self, game_state, player_name):
         self.game_state = game_state.build_proto_class()
         self.player_name = player_name
-        self.API_SERVER_URL = "http://engine-test.mechmania.io:8082/api/"
+        self.API_SERVER_URL = "http://engine-main.mechmania.io:8082/api/"
 
     def find_path(self, start, end):
         """
