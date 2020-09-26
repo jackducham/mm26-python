@@ -57,8 +57,8 @@ class Player(character.Character):
 
     def has_magic_effect(self, effect):
         return isinstance(effect, str) and (
-            (self.hat is not None and self.hat.get_magic_effect == effect)
-            or (self.accessory is not None and self.accessory.get_magic_effect == effect))
+            (self.hat is not None and self.hat.magic_hat_effect() == effect)
+            or (self.accessory is not None and self.accessory.get_magic_effect() == effect))
 
     def get_speed(self):
         flat_change = 0
