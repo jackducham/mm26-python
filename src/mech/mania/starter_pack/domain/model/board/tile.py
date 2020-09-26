@@ -10,6 +10,8 @@ from mech.mania.engine.domain.model import item_pb2
 class Tile:
     def __init__(self, proto_tile: board_pb2.Tile):
 
+        self.proto_tile = proto_tile
+
         self.items = []
         for item in proto_tile.items:
             if isinstance(item, item_pb2.Clothes):
@@ -37,3 +39,6 @@ class Tile:
 
     def get_type(self):
         return self.type
+
+    def build_proto_class(self):
+        return self.proto_tile
