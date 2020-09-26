@@ -185,7 +185,7 @@ class Player(character.Character):
             percent_change += self.clothes.get_stats().get_percent_defense_change()
 
             if (self.has_magic_effect("CLOTHES_BOOST")):
-                flat_change += self.clothes.get_stats.get_flat_defense_change()
+                flat_change += self.clothes.get_stats().get_flat_defense_change()
 
         if self.shoes is not None:
             flat_change += self.shoes.get_stats().get_flat_defense_change()
