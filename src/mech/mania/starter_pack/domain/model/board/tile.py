@@ -20,10 +20,12 @@ class Tile:
                 self.items.append(Hat(item.hat))
             elif isinstance(item, item_pb2.Shoes):
                 self.items.append(Shoes(item.shoes))
+            elif isinstance(item, item_pb2.Accessory):
+                self.items.append(Accessory(item.accessory))
             elif isinstance(item, item_pb2.Weapon):
                 self.items.append(Weapon(item.weapon))
             elif isinstance(item, item_pb2.Consumable):
-                self.items.append(Consumable(item.max_stack, item.consumable))
+                self.items.append(Consumable(item.consumable))
 
         if proto_tile.tile_type == board_pb2.Tile.TileType.VOID:
             self.type = "VOID"
