@@ -212,7 +212,7 @@ class API:
         @param position: the position to test the safety of
         @return True if any enemy can attack in one turn, False otherwise
         """
-        if isinstance(pos, position.Position) and isinstance(player_name, str):
+        if isinstance(pos, position.Position):
             url = self.API_SERVER_URL + "inRangeOfAttack"
             payload = api_pb2.APIInRangeOfAttackRequest()
             payload.gameState.CopyFrom(self.game_state)
