@@ -34,7 +34,7 @@ class Strategy:
                 action_index=self.my_player.get_free_inventory_index()
             )
 
-        tile_items = self.board.get_tile_at(self.curr_pos).get_items()
+        tile_items = self.board.get_tile_at(self.curr_pos).items
         if tile_items is not None or len(tile_items) > 0:
             self.memory.set_value("last_action", "PICKUP")
             return CharacterDecision(

@@ -1,4 +1,5 @@
 from mech.mania.engine.domain.model import board_pb2
+from mech.mania.starter_pack.domain.model.board.tile import Tile
 from mech.mania.starter_pack.domain.model.characters.position import Position
 
 
@@ -14,7 +15,7 @@ class Board:
         for x in range(self.width):
             row = []
             for y in range(self.height):
-                row.append(proto_board.grid[x * self.height + y])
+                row.append(Tile(proto_board.grid[x * self.height + y]))
             self.grid.append(row)
 
         self.portals = []
