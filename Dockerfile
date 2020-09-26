@@ -1,15 +1,15 @@
-FROM openjdk
-COPY --from=python:3 / /
+FROM python:3.8-alpine
 
-RUN pip install requests protobuf flask
+WORKDIR /app/
 
-COPY protos /protos
-COPY MM26GameEngine.jar /MM26GameEngine.jar
-COPY MockInfra.py /MockInfra.py
-COPY GameServer.py /GameServer.py
-COPY strategy.py /strategy.py
-COPY MemoryObject.py /MemoryObject.py
-COPY RedisWritePolicy.py /RedisWritePolicy.py
-COPY SetValueResult.py /SetValueResult.py
+COPY src/ src
+COPY requirements.txt .
 
-CMD ["python", "GameServer.py", "127.0.0.1", "8000"]
+RUN pip install -r requirements.txt
+
+ENV PYTHONPATH=src
+
+CMD ["python", "src/mech/mania/starter_pack/entrypoints/game_server.py", "0.0.0.0", "8080"]
+
+# docker build -t mm26/python-sp .
+# docker run mm26/python-sp:latest
