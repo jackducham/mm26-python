@@ -26,7 +26,10 @@ class GameServer:
         if testing_objects is not None:
             self.atomicInt = testing_objects
             self.debug = True
+
         app = Flask(__name__)
+        app.debug = self.debug
+        app.logger.setLevel(logging.INFO)
 
         @app.route('/server', methods=['POST'])
         def send_decision():
@@ -35,7 +38,7 @@ class GameServer:
             player_turn = player_pb2.PlayerTurn()
             player_turn.ParseFromString(payload)
 
-            print(f"Received playerTurn for player: {player_turn.player_name}, turn: {player_turn.game_state.state_id}")
+            app.logger.info(f"Received playerTurn for player: {player_turn.player_name}, turn: {player_turn.game_state.state_id}")
 
             game_state = GameState(player_turn.game_state)
             player_name = player_turn.player_name
@@ -45,7 +48,7 @@ class GameServer:
             try:
                 decision = self.strategy.make_decision(player_name, game_state)
             except Exception as err:
-                print("Exception making decision:")
+                app.logger.info("Exception making decision:")
                 traceback.print_exc()
                 decision = None
 
@@ -59,7 +62,7 @@ class GameServer:
             if self.debug:
                 self.atomicInt.increment()
 
-            print("Sending playerDecision")
+            app.logger.info("Sending playerDecision")
 
             return response_msg.SerializeToString()
 
@@ -72,7 +75,7 @@ class GameServer:
             try:
                 shutdown_server(delay)
             except Exception as e:
-                print("Failed to shutdown GameServer: " + e)
+                app.logger.info("Failed to shutdown GameServer: " + e)
 
             return 'Server shutting down...'
 
@@ -90,7 +93,7 @@ class GameServer:
         try:
             app.run(host=self.url, port=self.port)
         except Exception as e:
-            print("Failed to start GameServer: " + e)
+            app.logger.info("Failed to start GameServer: " + e)
 
 
 if __name__ == "__main__":
