@@ -1,10 +1,10 @@
-from engine.items.hat import Hat
-from engine.items.clothes import Clothes
-from engine.items.consumable import Consumable
-from engine.items.shoes import Shoes
-from engine.items.weapon import Weapon
-from protos import board_pb2
-from protos import item_pb2
+from mech.mania.starter_pack.domain.model.items.hat import Hat
+from mech.mania.starter_pack.domain.model.items.clothes import Clothes
+from mech.mania.starter_pack.domain.model.items.consumable import Consumable
+from mech.mania.starter_pack.domain.model.items.shoes import Shoes
+from mech.mania.starter_pack.domain.model.items.weapon import Weapon
+from mech.mania.engine.domain.model import board_pb2
+from mech.mania.engine.domain.model import item_pb2
 
 
 class Tile:
