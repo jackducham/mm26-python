@@ -25,7 +25,7 @@ class Strategy:
 
         self.logger.info("In make_decision")
 
-        last_action, type = memory.get_value("last_action")
+        last_action, type = self.memory.get_value("last_action")
         if last_action is not None and last_action == "PICKUP":
             self.memory.set_value("last_action", "EQUIP")
             return CharacterDecision(
