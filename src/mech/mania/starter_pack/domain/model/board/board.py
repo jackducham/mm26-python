@@ -27,6 +27,9 @@ class Board:
         """
         return self.grid
 
+    def get_tile_at(self, pos):
+        return self.grid[pos.x][pos.y]
+
     def get_portals(self):
         return self.portals
 

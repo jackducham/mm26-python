@@ -2,6 +2,7 @@ import logging
 
 from mech.mania.starter_pack.domain.model.characters.character_decision import CharacterDecision
 from mech.mania.starter_pack.domain.model.characters.position import Position
+from mech.mania.starter_pack.domain.model.game_state import GameState
 from mech.mania.starter_pack.domain.api import API
 
 
@@ -11,23 +12,71 @@ class Strategy:
         self.logger = logging.getLogger('strategy')
         self.logger.setLevel(logging.DEBUG)
 
-    def make_decision(self, player_name, game_state):
+    def make_decision(self, player_name: str, game_state: GameState) -> CharacterDecision:
         """
         Parameters:
         player_name (string): The name of your player
         game_state (GameState): The current game state
         """
-        api = API(game_state, player_name)
-        my_player = game_state.get_all_players()[player_name]
+        self.api = API(game_state, player_name)
+        self.my_player = game_state.get_all_players()[player_name]
+        self.board = game_state.get_pvp_board()
+        self.curr_pos = my_player.get_position()
 
         self.logger.info("In make_decision")
 
+        last_action, type = memory.get_value("last_action")
+        if last_action is not None and last_action == "PICKUP":
+            memory.set_value("last_action", "EQUIP")
+            return CharacterDecision(
+                decision_type="EQUIP",
+                action_position=None,
+                action_index=my_player.get_first_inventory_index()
+            )
 
+        tile_items = board.get_tile_at(curr_pos).get_items()
+        if tile_items is not None or len(tile_items) > 0:
+            memory.set_value("last_action", "PICKUP")
+            return CharacterDecision(
+                decision_type="PICKUP",
+                action_position=None,
+                action_index=0
+            )
 
+        weapon = my_player.get_weapon()
+        enemies = api.find_enemies(curr_pos)
+        if enemies is None or len(enemies) > 0:
+            memory.set_value("last_action", "MOVE")
+            return CharacterDecision(
+                decision_type="MOVE",
+                action_position=my_player.get_spawn_point(),
+                action_index=None
+            )
+
+        enemy_pos = enemies[0].get_position()
+        if curr_pos.manhattan_distance(enemy_pos) <= weapon.get_range():
+            memory.set_value("last_action", "ATTACK")
+            return CharacterDecision(
+                decision_type="ATTACK",
+                action_position=enemy_pos,
+                action_index=None
+            )
+
+        memory.set_value("last_action", "MOVE")
         decision = CharacterDecision(
-            decision_type="NONE",
-            action_position=None,
-            action_index=-1
+            decision_type="MOVE",
+            action_position=find_position_to_move(my_player, enemy_pos),
+            action_index=None
         )
         return decision
 
+
+    # feel free to write as many helper functions as you need!
+    def find_position_to_move(self, player: Position, destination: Position) -> Position:
+        path = self.api.find_path(player.get_position(), destination)
+        pos = None
+        if len(path) < player.get_speed():
+            pos = path[-1]
+        else:
+            pos = path[player.get_speed() - 1]
+        return pos
