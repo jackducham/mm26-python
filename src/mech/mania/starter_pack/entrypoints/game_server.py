@@ -6,6 +6,8 @@ import logging
 from flask import Flask, request
 
 from mech.mania.starter_pack.domain.memory.memory_object import MemoryObject
+from mech.mania.starter_pack.domain.model.characters.character import Character
+from mech.mania.starter_pack.domain.model.characters.character_decision import CharacterDecision
 from mech.mania.starter_pack.domain.model.game_state import GameState
 from mech.mania.starter_pack.domain.strategy import Strategy
 from mech.mania.engine.domain.model import character_pb2
@@ -52,12 +54,15 @@ class GameServer:
                 traceback.print_exc()
                 decision = None
 
-            if decision is not None:
+            if decision is not None and isinstance(decision, CharacterDecision):
                 response_msg = decision.build_proto_class_character_decision()
             else:
                 # Build NONE decision if contestant code failed
                 response_msg.decision_type = character_pb2.NONE
                 response_msg.index = -1
+
+                # Log incorrect return type
+                app.logger.info("Recieved incorrect type for decision. Expected: CharacterDecision, Actual: " + str(type(decision)))
 
             if self.debug:
                 self.atomicInt.increment()
