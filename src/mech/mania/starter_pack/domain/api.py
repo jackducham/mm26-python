@@ -1,4 +1,6 @@
+import logging
 import requests
+
 from mech.mania.engine.domain.model import api_pb2
 from mech.mania.engine.domain.model import character_pb2
 from mech.mania.engine.domain.model import game_pb2
@@ -20,6 +22,8 @@ class API:
         self.game_state = game_state.build_proto_class()
         self.player_name = player_name
         self.API_SERVER_URL = "http://engine-test.mechmania.io:8082/api/"
+        self.logger = logging.getLogger('API')
+        logging.basicConfig(level = logging.INFO)
 
     def find_path(self, start, end):
         """
@@ -43,6 +47,7 @@ class API:
             APIresponse.ParseFromString(response.content)
 
             if APIresponse.status.status != 200:
+                self.logger.warning("API returned non-200 status code")
                 return None
 
             path = []
@@ -71,6 +76,7 @@ class API:
             APIresponse = api_pb2.APIFindEnemiesByDistanceResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
+                self.logger.warning("API returned non-200 status code")
                 return None
 
             enemies = []
@@ -98,6 +104,7 @@ class API:
             APIresponse = api_pb2.APIFindMonstersByExpResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
+                self.logger.warning("API returned non-200 status code")
                 return None
 
             monsters = []
@@ -127,6 +134,7 @@ class API:
             APIresponse = api_pb2.APIFindItemsInRangeByDistanceResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
+                self.logger.warning("API returned non-200 status code")
                 return None
 
             items = []
@@ -170,6 +178,7 @@ class API:
             APIresponse = api_pb2.APIFindEnemiesInRangeOfAttackByDistanceResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
+                self.logger.warning("API returned non-200 status code")
                 return None
             enemies = []
             for enemy in APIresponse.enemies:
@@ -197,6 +206,7 @@ class API:
             APIresponse = api_pb2.APIFindAllEnemiesHitResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
+                self.logger.warning("API returned non-200 status code")
                 return None
             enemies = []
             for enemy in APIresponse.enemies_hit:
@@ -223,6 +233,7 @@ class API:
             APIresponse = api_pb2.APIInRangeOfAttackResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
+                self.logger.warning("API returned non-200 status code")
                 return None
             return APIresponse.inRangeOfAttack
         else:
@@ -245,6 +256,7 @@ class API:
             APIresponse = api_pb2.APIFindClosestPortalResponse()
             APIresponse.ParseFromString(response.content)
             if APIresponse.status.status != 200:
+                self.logger.warning("API returned non-200 status code")
                 return None
             return position.Position(APIresponse.portal)
         else:
@@ -262,6 +274,7 @@ class API:
         APIresponse = api_pb2.APILeaderBoardResponse()
         APIresponse.ParseFromString(response.content)
         if APIresponse.status.status != 200:
+            self.logger.warning("API returned non-200 status code")
             return None
 
         leaderBoard = []

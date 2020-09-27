@@ -62,7 +62,16 @@ class Strategy:
                 action_index=None
             )
 
+        enemy_to_atack = enemies[0]
         enemy_pos = enemies[0].get_position()
+        self.logger.info("Enemies:")
+        for enemy in enemies:
+            self.logger.info(f"Enemy(({enemy.get_position().x},{enemy.get_position().y},{enemy.get_position().board_id}),{enemy.get_name()})")
+            if not enemy.is_dead():
+                enemy_pos = enemy.get_position()
+                enemy_to_attack = enemy
+                break
+
         if self.curr_pos.manhattan_distance(enemy_pos) <= weapon.get_range():
             self.logger.info("There is an enemy within weapon range, attacking")
             self.memory.set_value("last_action", "ATTACK")
@@ -76,7 +85,7 @@ class Strategy:
         self.memory.set_value("last_action", "MOVE")
         decision = CharacterDecision(
             decision_type="MOVE",
-            action_position=self.find_position_to_move(self.my_player, enemies[0].get_position()),
+            action_position=self.find_position_to_move(self.my_player, enemy_to_attack.get_position()),
             action_index=None
         )
         return decision
