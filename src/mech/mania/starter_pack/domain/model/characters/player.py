@@ -206,7 +206,9 @@ class Player(character.Character):
         return max(1, int(defense))
 
     def get_free_inventory_index(self):
-        return -1 if None not in self.inventory else self.inventory.index(None)
+        if len(self.inventory) < self.INVENTORY_SIZE:
+            return len(self.inventory)
+        return -1
 
     def build_proto_class(self):
         return self.player_proto
