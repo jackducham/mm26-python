@@ -22,7 +22,7 @@ class Strategy:
         """
         self.api = API(game_state, player_name)
         self.my_player = game_state.get_all_players()[player_name]
-        self.board = game_state.get_pvp_board()
+        self.board = game_state.get_board(self.my_player.get_name())
         self.curr_pos = self.my_player.get_position()
 
         self.logger.info("In make_decision")
@@ -72,11 +72,11 @@ class Strategy:
                 action_index=None
             )
 
+        self.logger.info("Moving towards nearest enemy")
         self.memory.set_value("last_action", "MOVE")
-        self.logger.info("Moving towards the nearest enemy")
         decision = CharacterDecision(
             decision_type="MOVE",
-            action_position=self.find_position_to_move(self.my_player, enemy_pos),
+            action_position=self.find_position_to_move(self.my_player, enemies[0].get_position()),
             action_index=None
         )
         return decision
