@@ -21,21 +21,21 @@ class Player(character.Character):
         self.accessory = Accessory(player_proto.accessory)
         self.clothes = Clothes(player_proto.clothes)
         self.shoes = Shoes(player_proto.shoes)
-        self.inventory = [] * self.INVENTORY_SIZE
+        self.inventory = []
 
-        for i, item in enumerate(player_proto.inventory):
-            if isinstance(item, item_pb2.Clothes):
-                self.inventory[i] = Clothes(item.clothes)
-            elif isinstance(item, item_pb2.Hat):
-                self.inventory[i] = Hat(item.hat)
-            elif isinstance(item, item_pb2.Accessory):
-                self.inventory[i] = Accessory(item.accessory)
-            elif isinstance(item, item_pb2.Shoes):
-                self.inventory[i] = Shoes(item.shoes)
-            elif isinstance(item, item_pb2.Weapon):
-                self.inventory[i] = Weapon(item.weapon)
-            elif isinstance(item, item_pb2.Consumable):
-                self.inventory[i] = Consumable(item.max_stack, item.consumable)
+        for item in player_proto.inventory:
+            if item.HasField("clothes"):
+                self.inventory.append(Clothes(item.clothes))
+            elif item.HasField("hat"):
+                self.inventory.append(Hat(item.hat))
+            elif item.HasField("shoes"):
+                self.inventory.append(Shoes(item.shoes))
+            elif item.HasField("accessory"):
+                self.inventory.append(Accessory(item.accessory))
+            elif item.HasField("weapon"):
+                self.inventory.append(Weapon(item.weapon))
+            elif item.HasField("consumable"):
+                self.inventory.append(Consumable(item.consumable))
 
     def get_hat(self):
         return self.hat
